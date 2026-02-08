@@ -1,0 +1,34 @@
+# Executive Summary
+
+<!--
+This section provides a condensed view of the entire proposal, one page long.
+It should be a comprehensive high-level overview that captures the essence of the proposal, including its goals, methods, expected outcomes, deliverables, and budget.
+-->
+
+## Overview
+
+The `partitions` package [@partitionspackage] is a widely-used R utility for enumerating integer partitions and related combinatorial structures. With over 1.3 million downloads and 6,000–8,000 monthly users, it is critical R infrastructure. However, the package suffers from two key limitations: (1) bulk-generation APIs cause catastrophic memory exhaustion for large problems, and (2) the existing iterator API is non-standard, preventing seamless integration with modern R ecosystems (`foreach`, `itertools`, `parallel`).
+
+This proposal seeks to modernise the `partitions` package by implementing the standard S3 `iterators` protocol [@iteratorspackage], enabling lazy evaluation, efficient memory usage, and interoperability with parallel computing frameworks. We will create a new S3 class `partitions_iter` with `nextElem` methods for the core enumeration functions, along with comprehensive documentation and vignettes demonstrating practical use cases.
+
+## Project Scope
+
+**Primary Deliverable:** An S3 `partitions_iter` class providing scalable, lazy iteration that conforms to the `iterators` interface, enabling direct integration with `foreach()` and `itertools` [@itertoolspackage].
+
+**Secondary Deliverables:**
+
+- Comprehensive Quarto vignette with 5+ worked examples: serial iteration, `foreach()` parallelisation, `itertools` chaining, memory-efficiency comparisons.
+- Full test suite covering concurrent iterator behaviour, edge cases, and GitHub issue resolution.
+- CRAN-ready code and final review with Robin Hankin.
+
+## Budget & Timeline
+
+We request **£8,117.60** (approximately $10,500 USD) to fund **80 hours** of development at 0.05 FTE over **6 months** (1 June – 30 November 2026). This equates to approximately **half a day per week**, with contingency for maintainer advisory time during final review.
+
+## Team
+
+The project is led by the grant applicant (0.05 FTE) with **Robin Hankin**, the original `partitions` package author, as a collaborator providing technical guidance, code review, and CRAN liaison.
+
+## Expected Impact
+
+This modernisation unlocks new use cases: researchers can process arbitrarily large partition problems without memory crashes, and practitioners can leverage the package seamlessly within modern R functional pipelines and parallel frameworks.

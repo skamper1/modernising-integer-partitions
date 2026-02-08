@@ -1,0 +1,94 @@
+---
+bibliography: references.bib
+---
+
+# The Problem
+
+```{=html}
+<!--
+Outlining the issue / weak point / problem to be solved by this
+proposal. This should be a compelling section that sets the reader up
+for the next section - the proposed solution!
+
+It is important to cover:
+
+ - [ ] What the problem is
+ - [ ] Who it affects
+ - [ ] Why is it a problem
+ - [ ] What will solving the problem enable (why should it be solved)
+ - [ ] Brief summary of existing work and previous attempts (e.g., relevant R packages)
+ - [ ] If proposing changes to R itself: letter of support from R Core member
+-->
+```
+
+## What Is the Problem?
+
+The `partitions` package [@partitionspackage] provides two distinct APIs for enumerating partitions:
+
+1. **Bulk-generation functions** (`parts()`, `restrictedparts()`, `diffparts()`): Generate all partitions in memory as a matrix and return them at once.
+2. **Stepwise iteration** (`firstpart()` + `nextpart()`, etc.): Users write manual `while` loops, maintaining state vectors and calling low-level stepping functions.
+
+Both approaches have critical limitations.
+
+### Combinatorial Explosion & Memory Crashes
+
+For even moderate values of $n$, the number of partitions grows explosively. The partition count function $p(n)$ grows as:
+
+$$p(n) \sim \frac{1}{4n\sqrt{3}} \exp\left(\pi\sqrt{\frac{2n}{3}}\right)$$
+
+Concretely: $p(50) \approx 204$ million partitions; $p(100) \approx 190$ quadrillion. Users attempting `parts(50)` or larger will exhaust RAM and crash their R session. This is not a minor inconvenience, it is a **hard blocker** for realistic combinatorial research.
+
+### Non-Standard Iterator Protocol
+
+The `firstpart()`/`nextpart()` API does not conform to the R ecosystem's standard iterator interface defined by the `iterators` package [@iteratorspackage]. Users cannot:
+
+- Pass partition iterators directly to `foreach()` without custom wrappers.
+- Chain partition iterators with `itertools` utilities like `ichain()`, `ifilter()`, or `izip()` [@itertoolspackage].
+- Use partition enumeration in standard parallel frameworks designed for iterators.
+
+Instead, users write verbose, error-prone `while` loops:
+
+```r
+part <- firstpart(20)
+results <- list()
+while (!islastpart(part)) {
+  results[[length(results) + 1]] <- process(part)
+  part <- nextpart(part, check=FALSE)
+}
+```
+
+This pattern is tedious, hard to maintain, and incompatible with lazy evaluation and parallelisation idioms.
+
+## Who Is Affected?
+
+With **1.3 million total downloads** and **6,000–8,000 monthly users**, the `partitions` package serves:
+
+- **Researchers** in combinatorics and number theory performing exhaustive enumeration.
+- **Statisticians** using partitions for resampling and bootstrap methods.
+- **Operations researchers** solving integer partition problems.
+- **Parallel computing practitioners** seeking to distribute combinatorial tasks across clusters.
+
+## Why Is This a Problem?
+
+1. **Ecosystem Misalignment:** Modern R functional programming (via `foreach`, `itertools`, `furrr`) assumes standard iterator interfaces. `partitions` is an exception, creating friction and requiring custom adapters.
+2. **Memory Degradation:** Researchers working with realistic problem sizes cannot use convenient bulk-generation APIs and must resort to manual state management, introducing bugs and reduced code clarity.
+3. **Concurrency Barriers:** Parallel frameworks cannot transparently distribute work over partition enumerations because the non-standard API provides no standard way to yield values on demand.
+
+## What Will Solving This Enable?
+
+Implementing standard iterators will:
+
+- **Enable lazy evaluation:** Users iterate over arbitrarily large partition streams without materialising all values in memory.
+- **Unlock parallel workflows:** Standard iterators integrate seamlessly with `foreach()`, `parallel::makeCluster()`, and `furrr`.
+- **Improve interoperability:** Partition iterators can be composed with other `itertools` operations (filtering, zipping, chaining).
+- **Reduce cognitive load:** Users write familiar, standard R code instead of custom loops.
+
+## Existing Work & Precedent
+
+Standard iterator support is well-established throughout the R ecosystem:
+
+- The `iterators` package [@iteratorspackage] defines the S3 `iter` class and `nextElem` generic method.
+- The `itertools` package [@itertoolspackage] provides composable combinators (`chain`, `filter`, `zip`) that work with any standard iterator.
+- Packages like `foreach` and `furrr` assume standard iterator interfaces for parallel iteration.
+
+The `partitions` package simply needs to align with these established conventions. The existing `firstpart()`/`nextpart()` API will remain for backwards compatibility; we will **add** (not replace) the standard interface.

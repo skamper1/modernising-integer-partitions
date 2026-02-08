@@ -1,0 +1,5 @@
+project:
+  title: "Modernising Integer Partitions: Implementing Standard Iterators for the partitions Package"
+  render:
+    - "*.qmd"
+    - "!proposal/"

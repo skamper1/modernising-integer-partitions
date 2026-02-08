@@ -1,0 +1,66 @@
+# Success
+
+<!--
+Projects should have a definition of done that is measurable, and a
+thorough understanding going in of what the risks are to delivery
+-->
+
+## Definition of Done
+
+Success is measured by the following concrete, verifiable outcomes:
+
+1. **Code merged and released:** All iterator implementation code is merged into the main branch of the GitHub repository and accepted by Robin Hankin for inclusion in a new CRAN release (version number TBD, e.g., `partitions >= 1.11-0`).
+
+2. **Standard iterator conformance:** The new `partitions_iter` class is fully compliant with the `iterators` package S3 interface. Users can pass iterators directly to `foreach()` and `itertools` functions without custom wrappers.
+
+3. **Comprehensive test coverage:** A full `testthat` suite validates:
+   - Correctness: iterators produce identical results to bulk-generation functions.
+   - Concurrency: multiple iterators coexist and advance independently.
+   - Edge cases: n=0, n=1, m>n, restrictedparts with various constraints.
+   - Interoperability: `foreach()`, `itertools::ichain()`, `itertools::ifilter()`, and parallel backends.
+
+4. **Published vignette:** A detailed Quarto vignette is included in the package, demonstrating 5+ worked examples spanning serial iteration, parallelisation, composition, and real-world use cases.
+
+5. **GitHub issues resolved:** Outstanding GitHub issues relevant to iteration are addressed and closed (or documented as out-of-scope with clear justification).
+
+## Measuring Success
+
+We will track the following metrics throughout the project:
+
+| Metric | Success Criterion | Measurement Method |
+|---|---|---|
+| **Code Coverage** | ≥ 90% of new iterator code covered by tests | `covr` package report |
+| **CRAN Compliance** | All `devtools::check()` and `R CMD check` tests pass with zero errors/warnings | CI pipeline; manual CRAN dry-run |
+| **Interoperability** | `foreach()` and `itertools` examples execute without error | Unit tests + manual vignette examples |
+| **Memory Efficiency** | Lazy iteration uses <10% memory vs. bulk generation for large n | Benchmark script comparing `parts(50)` vs. `iparts(50)` |
+| **Documentation Quality** | Vignette is comprehensible to users unfamiliar with iterators | User testing (informal review by collaborators) |
+| **GitHub Issues** | ≥ 80% of open iterator-related issues resolved or documented | GitHub issue tracker review |
+| **CRAN Release** | New version submitted and accepted by CRAN | Official email confirmation from CRAN maintainers |
+
+### Progress Checkpoints
+
+- **End of June (Milestone 1):** Design doc approved by Robin; CI infrastructure operational; initial test suite in place.
+- **End of August (Milestone 2–3):** `iparts()`, `irestrictedparts()`, `idiffparts()` factory functions implemented and tested; `foreach()` integration working.
+- **End of September (Milestone 3):** `itertools` integration functional; GitHub issues triaged and addressed.
+- **End of October (Milestone 4):** Vignette drafted and reviewed; all documentation updated.
+- **End of November (Milestone 5):** CRAN submission completed; public announcement released.
+
+## Future Work
+
+### Short-term (Post-Release)
+
+- **Additional partition types:** Extend iterator support to `setparts()`, `blockparts()`, `compositions()` if demand warrants.
+- **Performance optimisation:** Profile and optimise the `nextElem()` closure if memory/CPU overhead becomes significant in high-throughput scenarios.
+- **Educational resources:** Publish a blog post or tutorial on the `partitions` package ecosystem for the R community blog.
+
+### Medium-term (6–12 Months)
+
+- **Parallel sampling:** Develop advanced itertools, e.g., `isample_partitions()` for unbiased random partition sampling in parallel.
+- **Integration with `furrr`:** Ensure seamless compatibility with `furrr::future_map()` and other functional programming packages.
+- **Package ecosystem integration:** Collaborate with authors of related packages (e.g., combinatorics, optimisation) to showcase shared iterator workflows.
+
+### Long-term (1–2 Years)
+
+- **Persistent state storage:** Support serialisation of iterator state to disk, enabling resumption of long-running enumerations across sessions.
+- **Distributed computing:** Explore Apache Spark / Hadoop integration for massive-scale partition enumeration in clusters beyond standard R parallelism.
+- **Combinatorics library expansion:** Consider generalising the iterator pattern to other combinatorial enumerations (permutations, combinations, Young tableaux, etc.) as a separate infrastructure project.

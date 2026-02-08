@@ -1,0 +1,38 @@
+---
+title: "Modernising Integer Partitions: Implementing Standard Iterators for the partitions Package"
+author:
+  - name: Sam Kamperis
+    orcid: 0000-0002-0539-6994
+    affiliations:
+      - "Oxford Brookes University"
+  - name: Robin Hankin
+    orcid: 0000-0001-5982-0415
+    affiliations:
+      - "University of Stirling"
+date: today
+date-format: iso
+format:
+  html:
+    embed-resources: true
+  hikmah-pdf:
+    geometry:
+      - left=1.25in
+      - right=1.25in
+bibliography: references.bib
+---
+
+
+{{< include proposal/00-exec-summary.qmd >}}
+
+{{< include proposal/01-signatories.qmd >}}
+
+{{< include proposal/02-problemdefinition.qmd >}}
+
+{{< include proposal/03-proposal.qmd >}}
+
+{{< include proposal/04-timeline.qmd >}}
+
+{{< include proposal/05-success.qmd >}}
+
+::: refs
+:::
