@@ -7,7 +7,7 @@ It should be a comprehensive high-level overview that captures the essence of th
 
 ## Overview
 
-The `partitions` package [@partitionspackage] is a widely-used R utility for enumerating integer partitions and related combinatorial structures. With over 1.3 million downloads and 6,000–8,000 monthly users, it is critical R infrastructure. However, the package suffers from two key limitations: (1) bulk-generation APIs cause catastrophic memory exhaustion for large problems, and (2) the existing iterator API is non-standard, preventing seamless integration with modern R ecosystems (`foreach`, `itertools`, `parallel`).
+The `partitions` package [@partitionspackage] is a widely-used R utility for enumerating integer partitions and related combinatorial structures. With over 1.3 million downloads, 6000–8000 monthly users, and 36 dependencies, it is critical R infrastructure. However, the package suffers from two key limitations: (1) bulk-generation APIs cause catastrophic memory exhaustion for large problems, and (2) the existing iterator API is non-standard, preventing seamless integration with modern R ecosystems (`foreach`, `itertools`, `parallel`).
 
 This proposal seeks to modernise the `partitions` package by implementing the standard S3 `iterators` protocol [@iteratorspackage], enabling lazy evaluation, efficient memory usage, and interoperability with parallel computing frameworks. We will create a new S3 class `partitions_iter` with `nextElem` methods for the core enumeration functions, along with comprehensive documentation and vignettes demonstrating practical use cases.
 
