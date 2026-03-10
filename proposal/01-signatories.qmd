@@ -32,3 +32,4 @@ proposal? This should include any R Consortium & ISC members who the
 proposal has been discussed with.
 -->
 
+[**James Maunder**](https://www.brookes.ac.uk/profiles/staff/james-maunder)
