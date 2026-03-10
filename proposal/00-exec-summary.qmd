@@ -23,7 +23,17 @@ This proposal seeks to modernise the `partitions` package by implementing the st
 
 ## Budget & Timeline
 
-We request **£8,117.60** (approximately $10,500 USD) to fund **80 hours** of development at 0.05 FTE over **6 months** (1 June – 30 November 2026). This equates to approximately **half a day per week**, with contingency for maintainer advisory time during final review.
+We request **£12,401.96** (**USD 16,670.03**) to fund **124 hours** of development. This is a joint costing from Oxford Brookes University and the University of Stirling.
+
+Sam Kamperis (Oxford Brookes) would be allocated 80 hours for the development. Robin Hankin (Stirling) would be allocated 44.2 hours. There is also a small budget for Robin to travel and stay in Oxford for two nights.
+
+
+| Item | Cost |
+|------|------|
+| Sam Kamperis 80 hours              | **£8,117.60** |
+| Robin Hankin 44.2 hours            | **£3,934.36** |
+| Travel (Hotel + Train to Oxford)   | **£350.00**   |
+| **Total**                          | **£12,401.96**|
 
 ## Team
 
