@@ -17,6 +17,8 @@ go? Briefly describe all participants and the skills they will bring
 to the project.
 -->
 
+[**Sam Kamperis**](https://www.brookes.ac.uk/profiles/staff/sam-kamperis) [Github](https://github.com/skamper1)
+
 ## Contributors
 <!--
 Who are the people who have actively helped with this proposal but
