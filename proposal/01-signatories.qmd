@@ -33,3 +33,6 @@ proposal has been discussed with.
 -->
 
 [**James Maunder**](https://www.brookes.ac.uk/profiles/staff/james-maunder)
+
+[**Fridolin Wild**](https://profiles.open.ac.uk/f-wild)
+[Github](https://github.com/fwild)
