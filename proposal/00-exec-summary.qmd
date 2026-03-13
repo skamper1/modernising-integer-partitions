@@ -41,4 +41,4 @@ The project is led by the grant applicant (0.05 FTE) with **Robin Hankin**, the 
 
 ## Expected Impact
 
-This modernisation unlocks new use cases: researchers can process arbitrarily large partition problems without memory crashes, and practitioners can leverage the package seamlessly within modern R functional pipelines and parallel frameworks.
+This modernisation unlocks new use cases: practitioners can now leverage the package seamlessly within modern R functional pipelines and parallel frameworks, enabling applications such as high-throughput research tasks in operations research, cryptography, and scientific computing. The new iterator interface allows direct integration with tools like `foreach`, `future`, and `itertools`, supporting reproducible research, teaching, and complex computational workflows that were previously impractical. Previously, workarounds required verbose, error-prone custom code, discouraging adoption in teaching and research, and the lack of standard iterator support prevented the package’s use in parallel and distributed computing, limiting its utility in modern data science workflows.
