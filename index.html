@@ -2438,7 +2438,7 @@ It should be a comprehensive high-level overview that captures the essence of th
 <section id="budget-timeline" class="level2">
 <h2 class="anchored" data-anchor-id="budget-timeline">Budget &amp; Timeline</h2>
 <p>We request <strong>£12,401.96</strong> (<strong>USD 16,670.03</strong>) to fund <strong>124 hours</strong> of development. This is a joint costing from Oxford Brookes University and the University of Stirling.</p>
-<p>Sam Kamperis (Oxford Brookes) would be allocated 80 hours for the development. Robin Hankin (Stirling) would be allocated 44.2 hours. There is also a small budget for Robin to travel and stay in Oxford for two nights.</p>
+<p>Sam Kamperis (Oxford Brookes) would be allocated 80 hours for the development. Robin Hankin (Stirling) would be allocated 44 hours, including a two-day focused visit in Oxford. There is also a small budget for Robin’s travel and accommodation for this visit.</p>
 <table class="caption-top table">
 <thead>
 <tr class="header">
@@ -2452,7 +2452,7 @@ It should be a comprehensive high-level overview that captures the essence of th
 <td><strong>£8,117.60</strong></td>
 </tr>
 <tr class="even">
-<td>Robin Hankin 44.2 hours</td>
+<td>Robin Hankin 44 hours</td>
 <td><strong>£3,934.36</strong></td>
 </tr>
 <tr class="odd">
@@ -2465,6 +2465,7 @@ It should be a comprehensive high-level overview that captures the essence of th
 </tr>
 </tbody>
 </table>
+<p><em>The travel budget (£350.00) covers Robin Hankin’s two-day visit to Oxford for technical collaboration and review.</em></p>
 </section>
 <section id="team" class="level2">
 <h2 class="anchored" data-anchor-id="team">Team</h2>
@@ -2722,85 +2723,251 @@ This is where the proposal should be outlined.
 </section>
 <section id="project-plan" class="level1">
 <h1>Project Plan</h1>
-<section id="start-up-phase" class="level2">
-<h2 class="anchored" data-anchor-id="start-up-phase">Start-up Phase</h2>
-<!--
-Covering the planning phase, this section should provide a relatively
-detailed plan of how work will start on the project. This section is
-important because projects need to get up and running quickly.
-
-
- - [ ] Setting up collaboration platform inc. code for contributors etc.
- - [ ] Licence decisions
- - [ ] Reporting framework
--->
-<p><strong>June 2026 (Weeks 1–4):</strong></p>
+<section id="phase-0-start-up-june-2026-weeks-14" class="level2">
+<h2 class="anchored" data-anchor-id="phase-0-start-up-june-2026-weeks-14">Phase 0: Start-up (June 2026, Weeks 1–4)</h2>
 <ul>
-<li>Establish collaboration infrastructure: GitHub issue tracking, pull request templates, and contributor guidelines.</li>
+<li>Establish collaboration infrastructure: GitHub issue tracking, pull request templates, contributor guidelines.</li>
 <li>Review existing <code>partitions</code> codebase: C API, R wrapper functions, test coverage, and GitHub open issues.</li>
-<li>Draft the S3 <code>partitions_iter</code> class structure and method signatures.</li>
+<li>Draft S3 <code>partitions_iter</code> class structure and method signatures.</li>
 <li>Set up continuous integration (CI) via GitHub Actions to ensure all changes pass <code>R CMD check</code> and <code>testthat</code> suite.</li>
 <li>Finalise scope and technical design with Robin Hankin.</li>
 </ul>
-<p><strong>Effort:</strong> ~15 hours (analysis, design, infrastructure).</p>
+<p><strong>Effort:</strong> 8 hours (Sam Kamperis), 8 hours (Robin Hankin)</p>
+<hr>
 </section>
-<section id="technical-delivery" class="level2">
-<h2 class="anchored" data-anchor-id="technical-delivery">Technical Delivery</h2>
-<!--
-Covering the actual delivery of the project this section should
-provide at least a high-level description of the implementation.
-
-Including target dates is really important as you need to be committed
-and the ISC need to have a means of tracking delivery
--->
-<section id="phase-1-core-implementation-julyaugust-2026-20-hours" class="level3">
-<h3 class="anchored" data-anchor-id="phase-1-core-implementation-julyaugust-2026-20-hours">Phase 1: Core Implementation (July–August 2026, ~20 hours)</h3>
-<p><strong>July 2026 (Weeks 5–8):</strong></p>
+<section id="phase-1-core-implementation-july-2026-weeks-58" class="level2">
+<h2 class="anchored" data-anchor-id="phase-1-core-implementation-july-2026-weeks-58">Phase 1: Core Implementation (July 2026, Weeks 5–8)</h2>
 <ul>
 <li>Implement <code>iparts()</code>, <code>irestrictedparts()</code>, <code>idiffparts()</code> factory functions.</li>
 <li>Implement <code>nextElem.partitions_iter()</code> method for each enumeration type.</li>
 <li>Ensure backward compatibility: existing <code>parts()</code>, <code>firstpart()</code>, <code>nextpart()</code> APIs remain unchanged.</li>
 <li>Write unit tests (<code>testthat</code>) covering basic iteration, edge cases (n=1, n=0, m&gt;n, etc.), and concurrent iterator coexistence.</li>
+<li>Robin Hankin: technical guidance and review (4 hours).</li>
 </ul>
-<p><strong>Effort:</strong> ~12–15 hours.</p>
+<p><strong>Effort:</strong> 16 hours (Sam Kamperis), 8 hours (Robin Hankin)</p>
+<hr>
 </section>
-<section id="phase-2-integration-testing-augustseptember-2026-15-hours" class="level3">
-<h3 class="anchored" data-anchor-id="phase-2-integration-testing-augustseptember-2026-15-hours">Phase 2: Integration &amp; Testing (August–September 2026, ~15 hours)</h3>
-<p><strong>August 2026 (Weeks 9–12):</strong></p>
+<section id="phase-2-integration-testing-august-2026-weeks-912" class="level2">
+<h2 class="anchored" data-anchor-id="phase-2-integration-testing-august-2026-weeks-912">Phase 2: Integration &amp; Testing (August 2026, Weeks 9–12)</h2>
 <ul>
 <li>Integrate with <code>foreach</code> package: test that <code>foreach(part = iparts(n)) %do%</code> and <code>%dopar%</code> work correctly.</li>
 <li>Integrate with <code>itertools</code> package: verify chaining via <code>itertools::ichain()</code>, filtering via <code>ifilter()</code>, etc.</li>
 <li>Address outstanding GitHub issues (bug fixes, documentation improvements) in the context of the iterator framework.</li>
 <li>Expand <code>testthat</code> suite to cover parallel iteration, GitHub issue resolution, and mathematical correctness benchmarks.</li>
 </ul>
-<p><strong>Effort:</strong> ~15 hours.</p>
+<p><strong>Effort:</strong> 16 hours (Sam Kamperis), 4 hours (Robin Hankin)</p>
+<hr>
 </section>
-<section id="phase-3-comprehensive-vignette-documentation-septemberoctober-2026-22.5-hours" class="level3">
-<h3 class="anchored" data-anchor-id="phase-3-comprehensive-vignette-documentation-septemberoctober-2026-22.5-hours">Phase 3: Comprehensive Vignette &amp; Documentation (September–October 2026, ~22.5 hours)</h3>
-<p><strong>September–October 2026 (Weeks 13–18):</strong></p>
+<section id="phase-3-vignette-documentation-september-2026-weeks-1318" class="level2">
+<h2 class="anchored" data-anchor-id="phase-3-vignette-documentation-september-2026-weeks-1318">Phase 3: Vignette &amp; Documentation (September 2026, Weeks 13–18)</h2>
 <ul>
 <li>Write a detailed Quarto vignette (5+ worked examples):
 <ol type="1">
-<li><strong>Serial enumeration:</strong> Basic <code>while</code> loop with <code>nextElem()</code>.</li>
-<li><strong><code>foreach()</code> parallelisation:</strong> Distributing partition enumeration across cores/cluster.</li>
-<li><strong><code>itertools</code> composition:</strong> Chaining, filtering, zipping partition iterators.</li>
-<li><strong>Memory-efficiency comparison:</strong> Bulk generation (<code>parts(n)</code>) vs. lazy iteration (<code>iparts(n)</code>) for large n.</li>
-<li><strong>Real-world use case:</strong> Sampling partitions, computing partition statistics, parallel optimisation.</li>
+<li>Serial enumeration: Basic <code>while</code> loop with <code>nextElem()</code>.</li>
+<li><code>foreach()</code> parallelisation: Distributing partition enumeration across cores/cluster.</li>
+<li><code>itertools</code> composition: Chaining, filtering, zipping partition iterators.</li>
+<li>Memory-efficiency comparison: Bulk generation (<code>parts(n)</code>) vs. lazy iteration (<code>iparts(n)</code>) for large n.</li>
+<li>Real-world use case: Sampling partitions, computing partition statistics, parallel optimisation.</li>
 </ol></li>
 <li>Update package <code>README.md</code> with modern iterator examples.</li>
 <li>Ensure all R documentation (<code>.Rd</code> files) reflects new iterator functions.</li>
 <li>Add CRAN-compliant licensing headers if necessary.</li>
+<li>Robin Hankin: two-day focused visit in Oxford (8 hours).</li>
 </ul>
-<p><strong>Effort:</strong> ~22.5 hours (comprehensive content + polishing).</p>
+<p><strong>Effort:</strong> 16 hours (Sam Kamperis), 16 hours (Robin Hankin)</p>
+<hr>
 </section>
-<section id="phase-4-final-review-release-octobernovember-2026-12.5-hours" class="level3">
-<h3 class="anchored" data-anchor-id="phase-4-final-review-release-octobernovember-2026-12.5-hours">Phase 4: Final Review &amp; Release (October–November 2026, ~12.5 hours)</h3>
-<p><strong>October 2026 (Weeks 19–22):</strong></p>
+<section id="phase-4-review-release-october-2026-weeks-1922" class="level2">
+<h2 class="anchored" data-anchor-id="phase-4-review-release-october-2026-weeks-1922">Phase 4: Review &amp; Release (October 2026, Weeks 19–22)</h2>
 <ul>
 <li>Code review with Robin Hankin; incorporate feedback.</li>
 <li>Final <code>R CMD check</code> and comprehensive testing.</li>
 <li>Prepare CRAN submission: ensure all checks pass, update <code>NEWS.md</code>, verify compatibility.</li>
+<li>Integrate 5-hour contingency for extended review, issue triage, or unexpected fixes.</li>
+<li>Robin Hankin: technical guidance and review (4 hours).</li>
 </ul>
+<p><strong>Effort:</strong> 16 hours (Sam Kamperis), 4 hours (Robin Hankin)</p>
+<hr>
+</section>
+<section id="phase-5-publicity-dissemination-november-2026-weeks-2326" class="level2">
+<h2 class="anchored" data-anchor-id="phase-5-publicity-dissemination-november-2026-weeks-2326">Phase 5: Publicity &amp; Dissemination (November 2026, Weeks 23–26)</h2>
+<ul>
+<li>Submit to CRAN.</li>
+<li>Address CRAN feedback (if any) and release new package version.</li>
+<li>Announce release on R Consortium blog and community channels.</li>
+<li>Robin Hankin: technical guidance and review (4 hours).</li>
+</ul>
+<p><strong>Effort:</strong> 8 hours (Sam Kamperis), 4 hours (Robin Hankin)</p>
+<hr>
+</section>
+<section id="budget-funding-plan" class="level2">
+<h2 class="anchored" data-anchor-id="budget-funding-plan">Budget &amp; Funding Plan</h2>
+<p><strong>Total Funding:</strong> £12,401.96<br>
+<strong>Duration:</strong> 6 months (1 June – 30 November 2026)<br>
+<strong>Total Hours:</strong> 124 (Sam Kamperis: 80, Robin Hankin: 44)</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Phase</th>
+<th>Dates</th>
+<th>Sam Kamperis (hrs)</th>
+<th>Robin Hankin (hrs)</th>
+<th>Deliverables</th>
+<th>Funding (%)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Phase 0: Start-up</strong></td>
+<td>June</td>
+<td>8</td>
+<td>8</td>
+<td>Collaboration infra, design doc, CI setup</td>
+<td>12%</td>
+</tr>
+<tr class="even">
+<td><strong>Phase 1: Core Implementation</strong></td>
+<td>July</td>
+<td>16</td>
+<td>8</td>
+<td>Iterator factory functions, unit tests, technical review</td>
+<td>16%</td>
+</tr>
+<tr class="odd">
+<td><strong>Phase 2: Integration &amp; Testing</strong></td>
+<td>August</td>
+<td>16</td>
+<td>4</td>
+<td><code>foreach</code> &amp; <code>itertools</code> integration, expanded tests</td>
+<td>16%</td>
+</tr>
+<tr class="even">
+<td><strong>Phase 3: Vignette &amp; Documentation</strong></td>
+<td>Sept</td>
+<td>16</td>
+<td>16</td>
+<td>Comprehensive Quarto vignette, updated docs, Oxford visit</td>
+<td>37%</td>
+</tr>
+<tr class="odd">
+<td><strong>Phase 4: Review &amp; Release</strong></td>
+<td>Oct</td>
+<td>16</td>
+<td>4</td>
+<td>CRAN submission, code review, contingency</td>
+<td>17%</td>
+</tr>
+<tr class="even">
+<td><strong>Phase 5: Publicity &amp; Dissemination</strong></td>
+<td>Nov</td>
+<td>8</td>
+<td>4</td>
+<td>Public announcement, CRAN feedback</td>
+<td>8%</td>
+</tr>
+<tr class="odd">
+<td><strong>Total</strong></td>
+<td>June–Nov</td>
+<td><strong>80</strong></td>
+<td><strong>44</strong></td>
+<td>Full modernisation + CRAN release</td>
+<td><strong>100%</strong></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="technical-delivery" class="level2">
+<h2 class="anchored" data-anchor-id="technical-delivery">Technical Delivery</h2>
+<!--
+Covering the actual delivery of the project this section should
+provide at least a high-level description of the implementation.
+Including target dates is really important as you need to be committed
+and the ISC need to have a means of tracking delivery
+-->
+<section id="phase-0-start-up-june-2026-weeks-14-1" class="level3">
+<h3 class="anchored" data-anchor-id="phase-0-start-up-june-2026-weeks-14-1">Phase 0: Start-up (June 2026, Weeks 1–4)</h3>
+<ul>
+<li>Establish collaboration infrastructure: GitHub issue tracking, pull request templates, contributor guidelines.</li>
+<li>Review existing <code>partitions</code> codebase: C API, R wrapper functions, test coverage, and GitHub open issues.</li>
+<li>Draft S3 <code>partitions_iter</code> class structure and method signatures.</li>
+<li>Set up continuous integration (CI) via GitHub Actions to ensure all changes pass <code>R CMD check</code> and <code>testthat</code> suite.</li>
+<li>Finalise scope and technical design with Robin Hankin.</li>
+</ul>
+<p><strong>Effort:</strong> 8 hours (Sam Kamperis), 8 hours (Robin Hankin)</p>
+<hr>
+</section>
+<section id="phase-1-core-implementation-july-2026-weeks-58-1" class="level3">
+<h3 class="anchored" data-anchor-id="phase-1-core-implementation-july-2026-weeks-58-1">Phase 1: Core Implementation (July 2026, Weeks 5–8)</h3>
+<ul>
+<li>Implement <code>iparts()</code>, <code>irestrictedparts()</code>, <code>idiffparts()</code> factory functions.</li>
+<li>Implement <code>nextElem.partitions_iter()</code> method for each enumeration type.</li>
+<li>Ensure backward compatibility: existing <code>parts()</code>, <code>firstpart()</code>, <code>nextpart()</code> APIs remain unchanged.</li>
+<li>Write unit tests (<code>testthat</code>) covering basic iteration, edge cases (n=1, n=0, m&gt;n, etc.), and concurrent iterator coexistence.</li>
+<li>Robin Hankin: technical guidance and review (8 hours).</li>
+</ul>
+<p><strong>Effort:</strong> 16 hours (Sam Kamperis), 8 hours (Robin Hankin)</p>
+<hr>
+</section>
+<section id="phase-2-integration-testing-august-2026-weeks-912-1" class="level3">
+<h3 class="anchored" data-anchor-id="phase-2-integration-testing-august-2026-weeks-912-1">Phase 2: Integration &amp; Testing (August 2026, Weeks 9–12)</h3>
+<ul>
+<li>Integrate with <code>foreach</code> package: test that <code>foreach(part = iparts(n)) %do%</code> and <code>%dopar%</code> work correctly.</li>
+<li>Integrate with <code>itertools</code> package: verify chaining via <code>itertools::ichain()</code>, filtering via <code>ifilter()</code>, etc.</li>
+<li>Address outstanding GitHub issues (bug fixes, documentation improvements) in the context of the iterator framework.</li>
+<li>Expand <code>testthat</code> suite to cover parallel iteration, GitHub issue resolution, and mathematical correctness benchmarks.</li>
+<li>Robin Hankin: technical guidance and review (4 hours).</li>
+</ul>
+<p><strong>Effort:</strong> 16 hours (Sam Kamperis), 4 hours (Robin Hankin)</p>
+<hr>
+</section>
+<section id="phase-3-vignette-documentation-september-2026-weeks-1318-1" class="level3">
+<h3 class="anchored" data-anchor-id="phase-3-vignette-documentation-september-2026-weeks-1318-1">Phase 3: Vignette &amp; Documentation (September 2026, Weeks 13–18)</h3>
+<ul>
+<li>Write a detailed Quarto vignette (5+ worked examples):
+<ol type="1">
+<li>Serial enumeration: Basic <code>while</code> loop with <code>nextElem()</code>.</li>
+<li><code>foreach()</code> parallelisation: Distributing partition enumeration across cores/cluster.</li>
+<li><code>itertools</code> composition: Chaining, filtering, zipping partition iterators.</li>
+<li>Memory-efficiency comparison: Bulk generation (<code>parts(n)</code>) vs. lazy iteration (<code>iparts(n)</code>) for large n.</li>
+<li>Real-world use case: Sampling partitions, computing partition statistics, parallel optimisation.</li>
+</ol></li>
+<li>Update package <code>README.md</code> with modern iterator examples.</li>
+<li>Ensure all R documentation (<code>.Rd</code> files) reflects new iterator functions.</li>
+<li>Add CRAN-compliant licensing headers if necessary.</li>
+<li>Robin Hankin: two-day focused visit in Oxford (16 hours).</li>
+</ul>
+<p><strong>Effort:</strong> 16 hours (Sam Kamperis), 16 hours (Robin Hankin)</p>
+<hr>
+</section>
+<section id="phase-4-review-release-october-2026-weeks-1922-1" class="level3">
+<h3 class="anchored" data-anchor-id="phase-4-review-release-october-2026-weeks-1922-1">Phase 4: Review &amp; Release (October 2026, Weeks 19–22)</h3>
+<ul>
+<li>Code review with Robin Hankin; incorporate feedback.</li>
+<li>Final <code>R CMD check</code> and comprehensive testing.</li>
+<li>Prepare CRAN submission: ensure all checks pass, update <code>NEWS.md</code>, verify compatibility.</li>
+<li>Integrate 5-hour contingency for extended review, issue triage, or unexpected fixes.</li>
+<li>Robin Hankin: technical guidance and review (4 hours).</li>
+</ul>
+<p><strong>Effort:</strong> 16 hours (Sam Kamperis), 4 hours (Robin Hankin)</p>
+<hr>
+</section>
+<section id="phase-5-publicity-dissemination-november-2026-weeks-2326-1" class="level3">
+<h3 class="anchored" data-anchor-id="phase-5-publicity-dissemination-november-2026-weeks-2326-1">Phase 5: Publicity &amp; Dissemination (November 2026, Weeks 23–26)</h3>
+<ul>
+<li>Submit to CRAN.</li>
+<li>Address CRAN feedback (if any) and release new package version.</li>
+<li>Announce release on R Consortium blog and community channels.</li>
+<li>Robin Hankin: technical guidance and review (4 hours).</li>
+</ul>
+<p><strong>Effort:</strong> 8 hours (Sam Kamperis), 4 hours (Robin Hankin)</p>
 <p><strong>November 2026 (Weeks 23–26):</strong></p>
 <ul>
 <li>Submit to CRAN.</li>
@@ -2841,8 +3008,8 @@ to be shared quarterly on the R Consortium blog.
 </ul>
 </section>
 </section>
-<section id="budget-funding-plan" class="level2">
-<h2 class="anchored" data-anchor-id="budget-funding-plan">Budget &amp; Funding Plan</h2>
+<section id="budget-funding-plan-1" class="level2">
+<h2 class="anchored" data-anchor-id="budget-funding-plan-1">Budget &amp; Funding Plan</h2>
 <!--
 Outline the milestones for development and how much funding will be
 required for each stage (as payments will be tied to project milestone
@@ -2860,73 +3027,88 @@ out to us.
 -->
 <section id="budget-allocation" class="level3">
 <h3 class="anchored" data-anchor-id="budget-allocation">Budget Allocation</h3>
-<p><strong>Total Funding:</strong> £8,117.60<br>
+<p><strong>Total Funding:</strong> £12,401.96<br>
 <strong>Duration:</strong> 6 months (1 June – 30 November 2026)<br>
-<strong>FTE:</strong> 0.05 (approximately 10 hours per week, or half a day per week)<br>
-<strong>Total Hours:</strong> 80</p>
+<strong>Total Hours:</strong> 124 (Sam Kamperis: 80, Robin Hankin: 44)</p>
 <table class="caption-top table">
 <colgroup>
-<col style="width: 20%">
-<col style="width: 20%">
-<col style="width: 20%">
-<col style="width: 20%">
-<col style="width: 20%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
 </colgroup>
 <thead>
 <tr class="header">
-<th>Milestone</th>
+<th>Phase</th>
 <th>Dates</th>
-<th>Effort (Hours)</th>
+<th>Sam Kamperis (hrs)</th>
+<th>Robin Hankin (hrs)</th>
 <th>Deliverables</th>
 <th>Funding (%)</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td><strong>Milestone 1: Analysis &amp; Architecture</strong></td>
+<td><strong>Phase 0: Start-up</strong></td>
 <td>June</td>
-<td>15</td>
-<td>Design doc, CI setup, initial tests</td>
-<td>20%</td>
+<td>8</td>
+<td>8</td>
+<td>Collaboration infra, design doc, CI setup</td>
+<td>12%</td>
 </tr>
 <tr class="even">
-<td><strong>Milestone 2: Core Implementation</strong></td>
-<td>July–August</td>
-<td>20</td>
-<td>Iterator factory functions and methods</td>
-<td>25%</td>
+<td><strong>Phase 1: Core Implementation</strong></td>
+<td>July</td>
+<td>16</td>
+<td>8</td>
+<td>Iterator factory functions, unit tests, technical review</td>
+<td>16%</td>
 </tr>
 <tr class="odd">
-<td><strong>Milestone 3: Integration &amp; Testing</strong></td>
-<td>August–September</td>
-<td>15</td>
-<td><code>foreach</code> &amp; <code>itertools</code> integration, GitHub issues</td>
-<td>20%</td>
+<td><strong>Phase 2: Integration &amp; Testing</strong></td>
+<td>August</td>
+<td>16</td>
+<td>4</td>
+<td><code>foreach</code> &amp; <code>itertools</code> integration, expanded tests</td>
+<td>16%</td>
 </tr>
 <tr class="even">
-<td><strong>Milestone 4: Vignette &amp; Documentation</strong></td>
-<td>September–October</td>
-<td>22.5</td>
-<td>Comprehensive Quarto vignette (5+ examples), updated docs</td>
-<td>28%</td>
+<td><strong>Phase 3: Vignette &amp; Documentation</strong></td>
+<td>Sept</td>
+<td>16</td>
+<td>16</td>
+<td>Comprehensive Quarto vignette, updated docs, Oxford visit</td>
+<td>37%</td>
 </tr>
 <tr class="odd">
-<td><strong>Milestone 5: Review &amp; Release</strong></td>
-<td>October–November</td>
-<td>12.5</td>
-<td>CRAN submission, Robin’s code review, public announcement</td>
-<td>7%</td>
+<td><strong>Phase 4: Review &amp; Release</strong></td>
+<td>Oct</td>
+<td>16</td>
+<td>4</td>
+<td>CRAN submission, code review, contingency</td>
+<td>17%</td>
 </tr>
 <tr class="even">
+<td><strong>Phase 5: Publicity &amp; Dissemination</strong></td>
+<td>Nov</td>
+<td>8</td>
+<td>4</td>
+<td>Public announcement, CRAN feedback</td>
+<td>8%</td>
+</tr>
+<tr class="odd">
 <td><strong>Total</strong></td>
-<td>June–November</td>
+<td>June–Nov</td>
 <td><strong>80</strong></td>
+<td><strong>44</strong></td>
 <td>Full modernisation + CRAN release</td>
 <td><strong>100%</strong></td>
 </tr>
 </tbody>
 </table>
-<p><strong>Payment Schedule:</strong> Funding will be disbursed upon completion of each milestone, subject to verification by the ISC and Robin Hankin. A small contingency reserve (5 hours) within the total 80-hour budget has been allocated for unexpected issues or extended review cycles.</p>
+<p><strong>Payment Schedule:</strong> 50% of the grant is paid upon contract signing, and 50% upon completion. The contingency (5 hours) is included in Phase 4 for extended review or unexpected issues.</p>
 </section>
 </section>
 </section>
