@@ -70,7 +70,7 @@ results <- foreach(part = iparts(20), .combine = c) %dopar% {
 
 | Failure Mode | Likelihood | Mitigation |
 |---|---|---|
-| Iterator state mutations are slow due to copied-on-modify semantics | Low | Partition vectors are relatively small (< 1000 elements typically); overhead is negligible. |
+| Iterator state mutations are slow due to copy-on-modify semantics | Low | Partition vectors are relatively small (< 1000 elements typically); overhead is negligible. |
 | Users expect `stop('StopIteration')` instead of `error()` | Low | `nextElem()` from `iterators` package already standardises this; we follow the convention. |
 | Parallel workers cannot access iterator closures | Low | Each worker receives a serialised copy of the iterator object (state vector, n, type); no shared mutable state. |
 | Restrictedparts edge cases fail (e.g., `m > n`) | Medium | Comprehensive unit tests; review existing test coverage; coordinate with Robin for edge-case validation. |
