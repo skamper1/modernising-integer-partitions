@@ -19,6 +19,8 @@ to the project.
 
 [**Sam Kamperis**](https://www.brookes.ac.uk/profiles/staff/sam-kamperis) [Github](https://github.com/skamper1)
 
+[**Robin Hankin**](https://www.stir.ac.uk/people/1966824) [Github](https://github.com/RobinHankin)
+
 ## Contributors
 <!--
 Who are the people who have actively helped with this proposal but
