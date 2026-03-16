@@ -40,7 +40,7 @@ Sam Kamperis (Oxford Brookes) would be allocated 80 hours for the development. R
 
 ## Team
 
-The project is led by the grant applicant (0.05 FTE) with **Robin Hankin**, the original `partitions` package author, as a collaborator providing technical guidance, code review, and CRAN liaison.
+The project is led by the grant applicant (9.7% FTE over 6 months) with **Robin Hankin**, the original `partitions` package author, as a collaborator providing technical guidance, code review, and CRAN liaison.
 
 ## Expected Impact
 
