@@ -78,7 +78,7 @@
 
 ## Budget & Funding Plan
 
-**Total Funding:** £12,401.96  
+**Total Funding:** £11,933.46 / $17,227.14 
 **Duration:** 6 months (1 June – 30 November 2026)  
 **Total Hours:** 124 (Sam Kamperis: 80, Robin Hankin: 44)
 
@@ -176,13 +176,7 @@ and the ISC need to have a means of tracking delivery
 
 **Effort:** 8 hours (Sam Kamperis), 4 hours (Robin Hankin)
 
-**November 2026 (Weeks 23–26):**
 
-- Submit to CRAN.
-- Address CRAN feedback (if any) and release new package version.
-- Announce release on R Consortium blog and community channels.
-
-**Effort:** ~12.5 hours (GitHub issue triaging, code review, release management).
 
 ---
 
@@ -236,7 +230,7 @@ out to us.
 
 ### Budget Allocation
 
-**Total Funding:** £12,401.96  
+**Total Funding:** £11,933.46 / $17,227.14
 **Duration:** 6 months (1 June – 30 November 2026)  
 **Total Hours:** 124 (Sam Kamperis: 80, Robin Hankin: 44)
 
