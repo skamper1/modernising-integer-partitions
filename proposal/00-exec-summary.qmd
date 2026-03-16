@@ -30,7 +30,7 @@ Sam Kamperis (Oxford Brookes) would be allocated 80 hours for the development. R
 
 
 | Item | Cost | USD Conversion @ 1.4436 |
-|------|------|
+|------|------|------|
 | Sam Kamperis 80 hours              | **£7,649.10** | **$11,042.24** |
 | Robin Hankin 44 hours              | **£3,934.36** |  **$5679.64** |
 | Travel (Hotel + Train to Oxford)   | **£350.00**   | **$505.15** |
