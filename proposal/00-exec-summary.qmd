@@ -24,23 +24,22 @@ This proposal seeks to modernise the `partitions` package by implementing the st
 ## Budget & Timeline
 
 
-We request **£11,933.46** (**$17,227.14**) to fund **124 hours** of development. This is a joint costing from Oxford Brookes University and the University of Stirling.
+We request **$17,227.14** to fund **124 hours** of development. This is a joint costing from Oxford Brookes University and the University of Stirling.
 
 Sam Kamperis (Oxford Brookes) would be allocated 80 hours for the development. Robin Hankin (Stirling) would be allocated 44 hours, including a two-day focused visit in Oxford. There is also a small budget for Robin's travel and accommodation for this visit.
 
+| Item | Cost (USD) |
+|------|------------|
+| Sam Kamperis 80 hours            | **$11,042.24** |
+| Robin Hankin 44 hours            | **$5,679.64**  |
+| Travel (Hotel + Train to Oxford) | **$505.15**    |
+| **Total**                        | **$17,227.14** |
 
-| Item | Cost | USD Conversion @ 1.4436 |
-|------|------|------|
-| Sam Kamperis 80 hours              | **£7,649.10** | **$11,042.24** |
-| Robin Hankin 44 hours              | **£3,934.36** |  **$5679.64** |
-| Travel (Hotel + Train to Oxford)   | **£350.00**   | **$505.15** |
-| **Total**                          | **£11,933.46**| **$17,227.14** |
-
-*The travel budget (£350.00 / $505.15) covers Robin Hankin's two-day visit to Oxford for technical collaboration and review.*
+*The travel budget ($505.15) covers Robin Hankin's two-day visit to Oxford for technical collaboration and review.*
 
 ## Team
 
-The project is led by the grant applicant (0.05 FTE) with **Robin Hankin**, the original `partitions` package author, as a collaborator providing technical guidance, code review, and CRAN liaison.
+The project is led by the grant applicant (9.7% FTE over 6 months) with **Robin Hankin**, the original `partitions` package author, as a collaborator providing technical guidance, code review, and CRAN liaison.
 
 ## Expected Impact
 
