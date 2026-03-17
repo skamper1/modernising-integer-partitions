@@ -24,18 +24,18 @@ This proposal seeks to modernise the `partitions` package by implementing the st
 ## Budget & Timeline
 
 
-We request **$17,227.14** to fund **124 hours** of development. This is a joint costing from Oxford Brookes University and the University of Stirling.
+We request **$18,331.21** to fund **124 hours** of development. This is a joint costing from Oxford Brookes University and the University of Stirling.
 
 Sam Kamperis (Oxford Brookes) would be allocated 80 hours for the development. Robin Hankin (Stirling) would be allocated 44 hours, including a two-day focused visit in Oxford. There is also a small budget for Robin's travel and accommodation for this visit.
 
 | Item | Cost (USD) |
 |------|------------|
 | Sam Kamperis 80 hours            | **$11,042.24** |
-| Robin Hankin 44 hours            | **$5,679.64**  |
-| Travel (Hotel + Train to Oxford) | **$505.15**    |
-| **Total**                        | **$17,227.14** |
+| Robin Hankin 44 hours            | **$6,783.71**  |
+| Travel (Hotel + Train to Oxford) | **$505.26**    |
+| **Total**                        | **$18,331.21** |
 
-*The travel budget ($505.15) covers Robin Hankin's two-day visit to Oxford for technical collaboration and review.*
+*The travel budget ($505.26) covers Robin Hankin's two-day visit to Oxford for technical collaboration and review.*
 
 ## Team
 
