@@ -4,7 +4,7 @@
 ## Phase 0: Start-up (June 2026, Weeks 1–4)
 
 - Establish collaboration infrastructure: GitHub issue tracking, pull request templates, contributor guidelines.
-- Review existing `partitions` codebase: C API, R wrapper functions, test coverage, and GitHub open issues.
+- Review existing `partitions` [@partitionspackage] codebase: C API, R wrapper functions, test coverage, and GitHub open issues.
 - Draft S3 `partitions_iter` class structure and method signatures.
 - Set up continuous integration (CI) via GitHub Actions to ensure all changes pass `R CMD check` and `testthat` suite.
 - Finalise scope and technical design with Robin Hankin.
@@ -18,8 +18,8 @@
 - Implement `iparts()`, `irestrictedparts()`, `idiffparts()` factory functions.
 - Implement `nextElem.partitions_iter()` method for each enumeration type.
 - Ensure backward compatibility: existing `parts()`, `firstpart()`, `nextpart()` APIs remain unchanged.
-- Write unit tests (`testthat`) covering basic iteration, edge cases (n=1, n=0, m>n, etc.), and concurrent iterator coexistence.
-- Robin Hankin: technical guidance and review (4 hours).
+- Write unit tests (`testthat` [@testthatpackage]) covering basic iteration, edge cases (n=1, n=0, m>n, etc.), and concurrent iterator coexistence.
+- Robin Hankin: technical guidance and review (8 hours).
 
 **Effort:** 16 hours (Sam Kamperis), 8 hours (Robin Hankin)
 
@@ -28,7 +28,7 @@
 ## Phase 2: Integration & Testing (August 2026, Weeks 9–12)
 
 - Integrate with `foreach` package: test that `foreach(part = iparts(n)) %do%` and `%dopar%` work correctly.
-- Integrate with `itertools` package: verify chaining via `itertools::ichain()`, filtering via `ifilter()`, etc.
+- Integrate with `itertools` [@itertoolspackage] package: verify chaining via `itertools::ichain()`, filtering via `ifilter()`, etc.
 - Address outstanding GitHub issues (bug fixes, documentation improvements) in the context of the iterator framework.
 - Expand `testthat` suite to cover parallel iteration, GitHub issue resolution, and mathematical correctness benchmarks.
 
@@ -47,7 +47,7 @@
 - Update package `README.md` with modern iterator examples.
 - Ensure all R documentation (`.Rd` files) reflects new iterator functions.
 - Add CRAN-compliant licensing headers if necessary.
-- Robin Hankin: two-day focused visit in Oxford (8 hours).
+- Robin Hankin: two-day focused visit in Oxford (16 hours).
 
 **Effort:** 16 hours (Sam Kamperis), 16 hours (Robin Hankin)
 
@@ -92,90 +92,7 @@
 | **Phase 5: Publicity & Dissemination** | Nov | 8 | 4 | Public announcement, CRAN feedback | 8% |
 | **Total** | June–Nov | **80** | **44** | Full modernisation + CRAN release | **100%** |
 
-## Technical Delivery
-
-<!--
-Covering the actual delivery of the project this section should
-provide at least a high-level description of the implementation.
-Including target dates is really important as you need to be committed
-and the ISC need to have a means of tracking delivery
--->
-
-### Phase 0: Start-up (June 2026, Weeks 1–4)
-
-- Establish collaboration infrastructure: GitHub issue tracking, pull request templates, contributor guidelines.
-- Review existing `partitions` codebase: C API, R wrapper functions, test coverage, and GitHub open issues.
-- Draft S3 `partitions_iter` class structure and method signatures.
-- Set up continuous integration (CI) via GitHub Actions to ensure all changes pass `R CMD check` and `testthat` suite.
-- Finalise scope and technical design with Robin Hankin.
-
-**Effort:** 8 hours (Sam Kamperis), 8 hours (Robin Hankin)
-
----
-
-### Phase 1: Core Implementation (July 2026, Weeks 5–8)
-
-- Implement `iparts()`, `irestrictedparts()`, `idiffparts()` factory functions.
-- Implement `nextElem.partitions_iter()` method for each enumeration type.
-- Ensure backward compatibility: existing `parts()`, `firstpart()`, `nextpart()` APIs remain unchanged.
-- Write unit tests (`testthat`) covering basic iteration, edge cases (n=1, n=0, m>n, etc.), and concurrent iterator coexistence.
-- Robin Hankin: technical guidance and review (8 hours).
-
-**Effort:** 16 hours (Sam Kamperis), 8 hours (Robin Hankin)
-
----
-
-### Phase 2: Integration & Testing (August 2026, Weeks 9–12)
-
-- Integrate with `foreach` package: test that `foreach(part = iparts(n)) %do%` and `%dopar%` work correctly.
-- Integrate with `itertools` package: verify chaining via `itertools::ichain()`, filtering via `ifilter()`, etc.
-- Address outstanding GitHub issues (bug fixes, documentation improvements) in the context of the iterator framework.
-- Expand `testthat` suite to cover parallel iteration, GitHub issue resolution, and mathematical correctness benchmarks.
-- Robin Hankin: technical guidance and review (4 hours).
-
-**Effort:** 16 hours (Sam Kamperis), 4 hours (Robin Hankin)
-
----
-
-### Phase 3: Vignette & Documentation (September 2026, Weeks 13–18)
-
-- Write a detailed Quarto vignette (5+ worked examples):
-  1. Serial enumeration: Basic `while` loop with `nextElem()`.
-  2. `foreach()` parallelisation: Distributing partition enumeration across cores/cluster.
-  3. `itertools` composition: Chaining, filtering, zipping partition iterators.
-  4. Memory-efficiency comparison: Bulk generation (`parts(n)`) vs. lazy iteration (`iparts(n)`) for large n.
-  5. Real-world use case: Sampling partitions, computing partition statistics, parallel optimisation.
-- Update package `README.md` with modern iterator examples.
-- Ensure all R documentation (`.Rd` files) reflects new iterator functions.
-- Add CRAN-compliant licensing headers if necessary.
-- Robin Hankin: two-day focused visit in Oxford (16 hours).
-
-**Effort:** 16 hours (Sam Kamperis), 16 hours (Robin Hankin)
-
----
-
-### Phase 4: Review & Release (October 2026, Weeks 19–22)
-
-- Code review with Robin Hankin; incorporate feedback.
-- Final `R CMD check` and comprehensive testing.
-- Prepare CRAN submission: ensure all checks pass, update `NEWS.md`, verify compatibility.
-- Integrate 5-hour contingency for extended review, issue triage, or unexpected fixes.
-- Robin Hankin: technical guidance and review (4 hours).
-
-**Effort:** 16 hours (Sam Kamperis), 4 hours (Robin Hankin)
-
----
-
-### Phase 5: Publicity & Dissemination (November 2026, Weeks 23–26)
-
-- Submit to CRAN.
-- Address CRAN feedback (if any) and release new package version.
-- Announce release on R Consortium blog and community channels.
-- Robin Hankin: technical guidance and review (4 hours).
-
-**Effort:** 8 hours (Sam Kamperis), 4 hours (Robin Hankin)
-
-
+**Payment schedule:** 50% upon contract signing, 50% upon completion. The contingency (5 hours) is included in Phase 4 for extended review or unexpected issues.
 
 ---
 
@@ -207,42 +124,6 @@ Code will be hosted on the official GitHub repository ([github.com/RobinHankin/p
 - **Delivery Blog Post (Post-release, ~December 2026):** Technical introduction to the new iterator API, with code examples and benchmarks.
 - **R Community Channels:** Announcements on R Weekly, R Discourse, and relevant social media.
 - **Conference Consideration:** Abstract submission to useR! 2027 if timeline permits.
-
-## Budget & Funding Plan
-
-<!--
-Outline the milestones for development and how much funding will be
-required for each stage (as payments will be tied to project milestone
-completion). Each milestone should specify the work to be done and the
-expected outcomes, providing enough detail for the ISC to understand
-the scope of the project work and assess the likelihood of success.
-
-We expect that most of the budget will be allocated
-for labor costs. We do not cover indirect costs. The ISC grants cannot
-cover such things as travel, lodging, food, journal publication fees,
-or personal hardware. Cloud services may be covered if they are specific
-to the project and the project period. The ISC reserves the right to vet
-how funds are used for each project separately. If in doubt, please reach
-out to us.
--->
-
-
-### Budget Allocation
-**Total Funding:** $18,331.21
-**Duration:** 6 months (1 June – 30 November 2026)  
-**Total Hours:** 124 (Sam Kamperis: 80, Robin Hankin: 44)
-
-| Phase | Dates | Sam Kamperis (hrs) | Robin Hankin (hrs) | Deliverables | Funding (%) |
-|---|---|---|---|---|---|
-| **Phase 0: Start-up** | June | 8 | 8 | Collaboration infra, design doc, CI setup | 12% |
-| **Phase 1: Core Implementation** | July | 16 | 8 | Iterator factory functions, unit tests, technical review | 16% |
-| **Phase 2: Integration & Testing** | August | 16 | 4 | `foreach` & `itertools` integration, expanded tests | 16% |
-| **Phase 3: Vignette & Documentation** | Sept | 16 | 16 | Comprehensive Quarto vignette, updated docs, Oxford visit | 37% |
-| **Phase 4: Review & Release** | Oct | 16 | 4 | CRAN submission, code review, contingency | 17% |
-| **Phase 5: Publicity & Dissemination** | Nov | 8 | 4 | Public announcement, CRAN feedback | 8% |
-| **Total** | June–Nov | **80** | **44** | Full modernisation + CRAN release | **100%** |
-
-**Payment Schedule:** 50% of the grant is paid upon contract signing, and 50% upon completion. The contingency (5 hours) is included in Phase 4 for extended review or unexpected issues.
 
 
 

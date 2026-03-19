@@ -9,11 +9,11 @@ thorough understanding going in of what the risks are to delivery
 
 Success is measured by the following concrete, verifiable outcomes:
 
-1. **Code merged and released:** All iterator implementation code is merged into the main branch of the GitHub repository and accepted by Robin Hankin for inclusion in a new CRAN release (version number TBD, e.g., `partitions >= 1.11-0`).
+1. **Code merged and released:** All iterator implementation code is merged into the main branch of the `partitions` [@partitionspackage] GitHub repository and accepted by Robin Hankin for inclusion in a new CRAN release (version number TBD, e.g., `partitions >= 1.11-0`).
 
-2. **Standard iterator conformance:** The new `partitions_iter` class is fully compliant with the `iterators` package S3 interface. Users can pass iterators directly to `foreach()` and `itertools` functions without custom wrappers.
+2. **Standard iterator conformance:** The new `partitions_iter` class is fully compliant with the `iterators` [@iteratorspackage] package S3 interface. Users can pass iterators directly to `foreach()` and `itertools` [@itertoolspackage] functions without custom wrappers.
 
-3. **Comprehensive test coverage:** A full `testthat` suite validates:
+3. **Comprehensive test coverage:** A full `testthat` [@testthatpackage] suite validates:
    - Correctness: iterators produce identical results to bulk-generation functions.
    - Concurrency: multiple iterators coexist and advance independently.
    - Edge cases: n=0, n=1, m>n, restrictedparts with various constraints.
@@ -29,10 +29,10 @@ We will track the following metrics throughout the project:
 
 | Metric | Success Criterion | Measurement Method |
 |---|---|---|
-| **Code Coverage** | ≥ 90% of new iterator code covered by tests | `covr` package report |
+| **Code Coverage** | ≥ 90% of new iterator code covered by tests | `covr` [@covrpackage] package report |
 | **CRAN Compliance** | All `devtools::check()` and `R CMD check` tests pass with zero errors/warnings | CI pipeline; manual CRAN dry-run |
 | **Interoperability** | `foreach()` and `itertools` examples execute without error | Unit tests + manual vignette examples |
-| **Memory Efficiency** | Lazy iteration uses <10% memory vs. bulk generation for large n | Benchmark script comparing `parts(50)` vs. `iparts(50)` |
+| **Memory Efficiency** | Lazy iteration peak memory is O(n) per step; bulk generation materialises the full partition matrix | `bench::mark(memory = TRUE)` [@benchpackage] comparing `parts(50)` vs. `iparts(50)`; reproducible scripts in `inst/benchmarks/` |
 | **Documentation Quality** | Vignette is comprehensible to users unfamiliar with iterators | User testing (informal review by collaborators) |
 | **GitHub Issues** | ≥ 80% of open iterator-related issues resolved or documented | GitHub issue tracker review |
 | **CRAN Release** | New version submitted and accepted by CRAN | Official email confirmation from CRAN maintainers |
@@ -56,7 +56,7 @@ We will track the following metrics throughout the project:
 ### Medium-term (6–12 Months)
 
 - **Parallel sampling:** Develop advanced itertools, e.g., `isample_partitions()` for unbiased random partition sampling in parallel.
-- **Integration with `furrr`:** Ensure seamless compatibility with `furrr::future_map()` and other functional programming packages.
+- **Integration with `furrr` [@furrrpackage]:** Ensure seamless compatibility with `furrr::future_map()` and other functional programming packages.
 - **Package ecosystem integration:** Collaborate with authors of related packages (e.g., combinatorics, optimisation) to showcase shared iterator workflows.
 
 ### Long-term (1–2 Years)
