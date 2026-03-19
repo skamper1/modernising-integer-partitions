@@ -4,7 +4,7 @@
 ## Phase 0: Start-up (June 2026, Weeks 1–4)
 
 - Establish collaboration infrastructure: GitHub issue tracking, pull request templates, contributor guidelines.
-- Review existing `partitions` codebase: C API, R wrapper functions, test coverage, and GitHub open issues.
+- Review existing `partitions` [@partitionspackage] codebase: C API, R wrapper functions, test coverage, and GitHub open issues.
 - Draft S3 `partitions_iter` class structure and method signatures.
 - Set up continuous integration (CI) via GitHub Actions to ensure all changes pass `R CMD check` and `testthat` suite.
 - Finalise scope and technical design with Robin Hankin.
@@ -18,7 +18,7 @@
 - Implement `iparts()`, `irestrictedparts()`, `idiffparts()` factory functions.
 - Implement `nextElem.partitions_iter()` method for each enumeration type.
 - Ensure backward compatibility: existing `parts()`, `firstpart()`, `nextpart()` APIs remain unchanged.
-- Write unit tests (`testthat`) covering basic iteration, edge cases (n=1, n=0, m>n, etc.), and concurrent iterator coexistence.
+- Write unit tests (`testthat` [@testthatpackage]) covering basic iteration, edge cases (n=1, n=0, m>n, etc.), and concurrent iterator coexistence.
 - Robin Hankin: technical guidance and review (8 hours).
 
 **Effort:** 16 hours (Sam Kamperis), 8 hours (Robin Hankin)
@@ -28,7 +28,7 @@
 ## Phase 2: Integration & Testing (August 2026, Weeks 9–12)
 
 - Integrate with `foreach` package: test that `foreach(part = iparts(n)) %do%` and `%dopar%` work correctly.
-- Integrate with `itertools` package: verify chaining via `itertools::ichain()`, filtering via `ifilter()`, etc.
+- Integrate with `itertools` [@itertoolspackage] package: verify chaining via `itertools::ichain()`, filtering via `ifilter()`, etc.
 - Address outstanding GitHub issues (bug fixes, documentation improvements) in the context of the iterator framework.
 - Expand `testthat` suite to cover parallel iteration, GitHub issue resolution, and mathematical correctness benchmarks.
 

@@ -70,7 +70,7 @@ With **1.3 million total downloads** and **6,000–8,000 monthly users**, the `p
 
 ## Why Is This a Problem?
 
-1. **Ecosystem Misalignment:** Modern R functional programming (via `foreach`, `itertools`, `furrr`) assumes standard iterator interfaces. `partitions` is an exception, creating friction and requiring custom adapters.
+1. **Ecosystem Misalignment:** Modern R functional programming (via `foreach`, `itertools`, `furrr` [@furrrpackage]) assumes standard iterator interfaces. `partitions` is an exception, creating friction and requiring custom adapters.
 2. **Memory Degradation:** Researchers working with realistic problem sizes cannot use convenient bulk-generation APIs and must resort to manual state management, introducing bugs and reduced code clarity.
 3. **Concurrency Barriers:** Parallel frameworks cannot transparently distribute work over partition enumerations because the non-standard API provides no standard way to yield values on demand.
 

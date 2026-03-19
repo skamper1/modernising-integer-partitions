@@ -10,7 +10,7 @@ This is where the proposal should be outlined.
 
 ## Overview
 
-We will modernise the `partitions` package by implementing the standard S3 `iterators` protocol [@iteratorspackage], enabling lazy, memory-efficient enumeration of partitions with seamless integration into the modern R ecosystem. The core deliverable is a new `partitions_iter` S3 class providing the `nextElem` method, allowing users to pass partition enumerations directly into `foreach()` loops, `itertools` combinators, and parallel frameworks.
+We will modernise the `partitions` package [@partitionspackage] by implementing the standard S3 `iterators` protocol [@iteratorspackage], enabling lazy, memory-efficient enumeration of partitions with seamless integration into the modern R ecosystem. The core deliverable is a new `partitions_iter` S3 class providing the `nextElem` method, allowing users to pass partition enumerations directly into `foreach()` loops, `itertools` [@itertoolspackage] combinators, and parallel frameworks.
 
 The solution preserves all existing APIs for backwards compatibility while adding a thin, well-tested layer that conforms to established iterator conventions. This approach minimises risk: we leverage the battle-tested `firstpart()`/`nextpart()` enumeration logic rather than replacing it, and we add comprehensive documentation and examples to guide users.
 
@@ -23,7 +23,7 @@ A working MVP consists of:
 1. **S3 class `partitions_iter`** with fields `state` (current partition vector), `n` (the target integer), and `type` (enumeration type: "unrestricted", "restricted", "distinct", etc.).
 2. **Method `nextElem.partitions_iter()`** that calls the appropriate stepping function (`nextpart()`, `nextdiffpart()`, etc.), returns the current state, advances state via the `<<-` operator, and throws `'StopIteration'` when exhausted.
 3. **Factory functions** `iparts()`, `irestrictedparts()`, `idiffparts()` that return an iterator (S3 object) for lazy enumeration.
-4. **Basic `testthat` tests** verifying that iterators produce the same results as bulk-generation functions, and that multiple iterators coexist without state collision.
+4. **Basic `testthat` [@testthatpackage] tests** verifying that iterators produce the same results as bulk-generation functions, and that multiple iterators coexist without state collision.
 
 Example usage:
 
