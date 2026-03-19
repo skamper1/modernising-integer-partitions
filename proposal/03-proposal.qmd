@@ -59,6 +59,27 @@ results <- foreach(part = iparts(20), .combine = c) %dopar% {
 - `foreach()` and `itertools` function detect the `iter` class and call `nextElem()` in a loop
 - State isolation is automatic: each call to `iparts()` creates a new closure with its own `state` variable
 
+### Benchmarking & Efficiency Methodology
+
+To substantiate the memory-efficiency claims in this proposal and to validate iterator call overhead, we will produce a reproducible benchmark suite included in the package vignette and deposited in `inst/benchmarks/`. Benchmarks focus on two dimensions most relevant to the proposal goals. We do not benchmark against `RcppAlgos` [@rcppalgospackage] or `arrangements` [@arrangementspackage] for raw generation throughput: those packages use compiled C++ routines operating in a different performance tier, and raw speed is not the objective here.
+
+**Memory efficiency — bulk vs. lazy generation:**
+
+| Target $n$ | Partitions $p(n)$ | Bulk `parts(n)` | Lazy `iparts(n)` |
+|---|---|---|---|
+| 20  | 627                          | Full matrix in memory          | O(n) peak, constant |
+| 30  | 5,604                        | Full matrix in memory          | O(n) peak, constant |
+| 50  | 204,226                      | Typically exceeds available RAM | Viable              |
+| 100 | $\approx 1.9 \times 10^{14}$ | Infeasible                     | Viable              |
+
+Memory profiling will use `bench::mark(memory = TRUE)` [@benchpackage] together with RSS measurements via `profmem`. For $n \geq 50$, bulk generation is expected to crash or exhaust available memory, providing direct empirical evidence for the memory-safety motivation of this work.
+
+**Iterator call overhead — new interface vs. existing stepping API:**
+
+We will compare the per-step time of `nextElem(iparts(n))` against the equivalent `nextpart(part, check = FALSE)` manual loop. Both paths invoke the same underlying C-level enumeration logic, so overhead from the S3 wrapper layer is expected to be negligible. Results will be reported using `bench::mark()` over at least 30 repetitions per condition.
+
+**Reproducibility:** Benchmark scripts and raw results will be committed to `inst/benchmarks/` and rendered in a vignette (memory-efficiency comparison).
+
 ### Assumptions
 
 1. **The C-level enumeration logic is correct and mature.** We are not reimplementing it; only wrapping it.

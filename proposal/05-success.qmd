@@ -32,7 +32,7 @@ We will track the following metrics throughout the project:
 | **Code Coverage** | ≥ 90% of new iterator code covered by tests | `covr` package report |
 | **CRAN Compliance** | All `devtools::check()` and `R CMD check` tests pass with zero errors/warnings | CI pipeline; manual CRAN dry-run |
 | **Interoperability** | `foreach()` and `itertools` examples execute without error | Unit tests + manual vignette examples |
-| **Memory Efficiency** | Lazy iteration uses <10% memory vs. bulk generation for large n | Benchmark script comparing `parts(50)` vs. `iparts(50)` |
+| **Memory Efficiency** | Lazy iteration peak memory is O(n) per step; bulk generation materialises the full partition matrix | `bench::mark(memory = TRUE)` comparing `parts(50)` vs. `iparts(50)`; reproducible scripts in `inst/benchmarks/` |
 | **Documentation Quality** | Vignette is comprehensible to users unfamiliar with iterators | User testing (informal review by collaborators) |
 | **GitHub Issues** | ≥ 80% of open iterator-related issues resolved or documented | GitHub issue tracker review |
 | **CRAN Release** | New version submitted and accepted by CRAN | Official email confirmation from CRAN maintainers |

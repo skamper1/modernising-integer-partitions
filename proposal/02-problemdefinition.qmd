@@ -92,3 +92,13 @@ Standard iterator support is well-established throughout the R ecosystem:
 - Packages like `foreach` and `furrr` assume standard iterator interfaces for parallel iteration.
 
 The `partitions` package simply needs to align with these established conventions. The existing `firstpart()`/`nextpart()` API will remain for backwards compatibility; we will **add** (not replace) the standard interface.
+
+## Competitive Landscape
+
+Several other R packages provide combinatorial generation and partition enumeration. Understanding their scope clarifies the gap this proposal addresses.
+
+**`RcppAlgos`** [@rcppalgospackage; @rcppalgos-benchmarks] provides highly optimised C++ routines for combinatorics, integer partitions, and number theory. Its `partitionsGeneral()` and `partitionsIter()` functions are among the fastest available in R, as documented in published benchmarks [@rcppalgos-benchmarks]. However, `RcppAlgos` exposes partitions through a custom S4 class (`Partitions-class`) with proprietary iteration methods (`@nextIter`, `@prevIter`, `@randomAccess`) that do not implement the standard `iterators` S3 protocol. Passing a `RcppAlgos` iterator to `foreach()` or composing it with `itertools` combinators requires bespoke wrapper code — the same friction this proposal resolves for `partitions`. Additionally, `RcppAlgos` focuses on numeric constrained-sum partitions and does not cover the set-partition (`setparts()`), block-partition (`blockparts()`), or multiset-partition semantics unique to `partitions`.
+
+**`arrangements`** [@arrangementspackage] provides memory-efficient generators and iterators for permutations, combinations, integer partitions, and compositions, with its own `ipartitions()` function. Like `RcppAlgos`, `arrangements` exposes a package-specific API (`getnext()`, `collect()`) rather than the standard `nextElem` interface, so partition iterators cannot be passed directly to `foreach` or `itertools` without custom adaptation.
+
+**Our approach is complementary, not competitive.** This proposal does not aim to replicate the compiled C++ performance of `RcppAlgos` or `arrangements`. Instead, it modernises the *interface layer* of the `partitions` package — bringing its unique partition types in line with the standard `iterators` protocol so they integrate natively with `foreach`, `furrr`, and `itertools`, an interoperability benefit that neither alternative currently provides.
