@@ -38,3 +38,6 @@ proposal has been discussed with.
 
 [**Fridolin Wild**](https://profiles.open.ac.uk/f-wild)
 [Github](https://github.com/fwild)
+
+[**Inna Skarga-Bandurova**](https://www.brookes.ac.uk/profiles/staff/inna-skarga-bandurova)
+[Github](https://github.com/fogletters)
