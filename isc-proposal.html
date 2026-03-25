@@ -8,7 +8,7 @@
 
 <meta name="author" content="Sam Kamperis">
 <meta name="author" content="Robin Hankin">
-<meta name="dcterms.date" content="2026-03-23">
+<meta name="dcterms.date" content="2026-03-25">
 
 <title>Modernising Integer Partitions: Implementing Standard Iterators for the partitions Package</title>
 <style>
@@ -2401,7 +2401,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">2026-03-23</p>
+      <p class="date">2026-03-25</p>
     </div>
   </div>
   
@@ -2436,8 +2436,8 @@ It should be a comprehensive high-level overview that captures the essence of th
 </section>
 <section id="budget-timeline" class="level2">
 <h2 class="anchored" data-anchor-id="budget-timeline">Budget &amp; Timeline</h2>
-<p>We request <strong>$18,331.21</strong> to fund <strong>124 hours</strong> of development. This is a joint costing from Oxford Brookes University and the University of Stirling.</p>
-<p>Sam Kamperis (Oxford Brookes) would be allocated 80 hours for the development. Robin Hankin (Stirling) would be allocated 44 hours, including a two-day focused visit in Oxford. There is also a small budget for Robin’s travel and accommodation for this visit.</p>
+<p>We request <strong>$11,989.98</strong> to fund <strong>124 hours</strong> of development. This is a joint costing from Oxford Brookes University and the University of Stirling.</p>
+<p>Sam Kamperis (Oxford Brookes) would be allocated 80 hours for the development. Robin Hankin (Stirling) would be allocated 44 hours.</p>
 <table class="caption-top table">
 <thead>
 <tr class="header">
@@ -2448,23 +2448,18 @@ It should be a comprehensive high-level overview that captures the essence of th
 <tbody>
 <tr class="odd">
 <td>Sam Kamperis 80 hours</td>
-<td><strong>$11,042.24</strong></td>
+<td><strong>$5,206.27</strong></td>
 </tr>
 <tr class="even">
 <td>Robin Hankin 44 hours</td>
 <td><strong>$6,783.71</strong></td>
 </tr>
 <tr class="odd">
-<td>Travel (Hotel + Train to Oxford)</td>
-<td><strong>$505.26</strong></td>
-</tr>
-<tr class="even">
 <td><strong>Total</strong></td>
-<td><strong>$18,331.21</strong></td>
+<td><strong>$11,989.98</strong></td>
 </tr>
 </tbody>
 </table>
-<p><em>The travel budget ($505.26) covers Robin Hankin’s two-day visit to Oxford for technical collaboration and review.</em></p>
 </section>
 <section id="team" class="level2">
 <h2 class="anchored" data-anchor-id="team">Team</h2>
@@ -2723,8 +2718,8 @@ This is where the proposal should be outlined.
 </section>
 <section id="project-plan" class="level1">
 <h1>Project Plan</h1>
-<section id="phase-0-start-up-june-2026-weeks-14" class="level2">
-<h2 class="anchored" data-anchor-id="phase-0-start-up-june-2026-weeks-14">Phase 0: Start-up (June 2026, Weeks 1–4)</h2>
+<section id="phase-0-start-up-july-2026-weeks-14" class="level2">
+<h2 class="anchored" data-anchor-id="phase-0-start-up-july-2026-weeks-14">Phase 0: Start-up (July 2026, Weeks 1–4)</h2>
 <ul>
 <li>Establish collaboration infrastructure: GitHub issue tracking, pull request templates, contributor guidelines.</li>
 <li>Review existing <code>partitions</code> codebase: C API, R wrapper functions, test coverage, and GitHub open issues.</li>
@@ -2735,8 +2730,8 @@ This is where the proposal should be outlined.
 <p><strong>Effort:</strong> 8 hours (Sam Kamperis), 8 hours (Robin Hankin)</p>
 <hr>
 </section>
-<section id="phase-1-core-implementation-july-2026-weeks-58" class="level2">
-<h2 class="anchored" data-anchor-id="phase-1-core-implementation-july-2026-weeks-58">Phase 1: Core Implementation (July 2026, Weeks 5–8)</h2>
+<section id="phase-1-core-implementation-august-2026-weeks-58" class="level2">
+<h2 class="anchored" data-anchor-id="phase-1-core-implementation-august-2026-weeks-58">Phase 1: Core Implementation (August 2026, Weeks 5–8)</h2>
 <ul>
 <li>Implement <code>iparts()</code>, <code>irestrictedparts()</code>, <code>idiffparts()</code> factory functions.</li>
 <li>Implement <code>nextElem.partitions_iter()</code> method for each enumeration type.</li>
@@ -2747,8 +2742,8 @@ This is where the proposal should be outlined.
 <p><strong>Effort:</strong> 16 hours (Sam Kamperis), 8 hours (Robin Hankin)</p>
 <hr>
 </section>
-<section id="phase-2-integration-testing-august-2026-weeks-912" class="level2">
-<h2 class="anchored" data-anchor-id="phase-2-integration-testing-august-2026-weeks-912">Phase 2: Integration &amp; Testing (August 2026, Weeks 9–12)</h2>
+<section id="phase-2-integration-testing-september-2026-weeks-912" class="level2">
+<h2 class="anchored" data-anchor-id="phase-2-integration-testing-september-2026-weeks-912">Phase 2: Integration &amp; Testing (September 2026, Weeks 9–12)</h2>
 <ul>
 <li>Integrate with <code>foreach</code> package: test that <code>foreach(part = iparts(n)) %do%</code> and <code>%dopar%</code> work correctly.</li>
 <li>Integrate with <code>itertools</code> package: verify chaining via <code>itertools::ichain()</code>, filtering via <code>ifilter()</code>, etc.</li>
@@ -2758,8 +2753,8 @@ This is where the proposal should be outlined.
 <p><strong>Effort:</strong> 16 hours (Sam Kamperis), 4 hours (Robin Hankin)</p>
 <hr>
 </section>
-<section id="phase-3-vignette-documentation-september-2026-weeks-1318" class="level2">
-<h2 class="anchored" data-anchor-id="phase-3-vignette-documentation-september-2026-weeks-1318">Phase 3: Vignette &amp; Documentation (September 2026, Weeks 13–18)</h2>
+<section id="phase-3-vignette-documentation-october-2026-weeks-1318" class="level2">
+<h2 class="anchored" data-anchor-id="phase-3-vignette-documentation-october-2026-weeks-1318">Phase 3: Vignette &amp; Documentation (October 2026, Weeks 13–18)</h2>
 <ul>
 <li>Write a detailed Quarto vignette (5+ worked examples):
 <ol type="1">
@@ -2777,8 +2772,8 @@ This is where the proposal should be outlined.
 <p><strong>Effort:</strong> 16 hours (Sam Kamperis), 16 hours (Robin Hankin)</p>
 <hr>
 </section>
-<section id="phase-4-review-release-october-2026-weeks-1922" class="level2">
-<h2 class="anchored" data-anchor-id="phase-4-review-release-october-2026-weeks-1922">Phase 4: Review &amp; Release (October 2026, Weeks 19–22)</h2>
+<section id="phase-4-review-release-november-2026-weeks-1922" class="level2">
+<h2 class="anchored" data-anchor-id="phase-4-review-release-november-2026-weeks-1922">Phase 4: Review &amp; Release (November 2026, Weeks 19–22)</h2>
 <ul>
 <li>Code review with Robin Hankin; incorporate feedback.</li>
 <li>Final <code>R CMD check</code> and comprehensive testing.</li>
@@ -2789,8 +2784,8 @@ This is where the proposal should be outlined.
 <p><strong>Effort:</strong> 16 hours (Sam Kamperis), 4 hours (Robin Hankin)</p>
 <hr>
 </section>
-<section id="phase-5-publicity-dissemination-november-2026-weeks-2326" class="level2">
-<h2 class="anchored" data-anchor-id="phase-5-publicity-dissemination-november-2026-weeks-2326">Phase 5: Publicity &amp; Dissemination (November 2026, Weeks 23–26)</h2>
+<section id="phase-5-publicity-dissemination-december-2026-weeks-2326" class="level2">
+<h2 class="anchored" data-anchor-id="phase-5-publicity-dissemination-december-2026-weeks-2326">Phase 5: Publicity &amp; Dissemination (December 2026, Weeks 23–26)</h2>
 <ul>
 <li>Submit to CRAN.</li>
 <li>Address CRAN feedback (if any) and release new package version.</li>
@@ -2802,7 +2797,7 @@ This is where the proposal should be outlined.
 </section>
 <section id="budget-funding-plan" class="level2">
 <h2 class="anchored" data-anchor-id="budget-funding-plan">Budget &amp; Funding Plan</h2>
-<p><strong>Total Funding:</strong> $18,331.21 <strong>Duration:</strong> 6 months (1 June – 30 November 2026)<br>
+<p><strong>Total Funding:</strong> $11,989.98 <strong>Duration:</strong> 6 months (1 July – 31 December 2026)<br>
 <strong>Total Hours:</strong> 124 (Sam Kamperis: 80, Robin Hankin: 44)</p>
 <table class="caption-top table">
 <colgroup>
@@ -2826,7 +2821,7 @@ This is where the proposal should be outlined.
 <tbody>
 <tr class="odd">
 <td><strong>Phase 0: Start-up</strong></td>
-<td>June</td>
+<td>July</td>
 <td>8</td>
 <td>8</td>
 <td>Collaboration infra, design doc, CI setup</td>
@@ -2834,7 +2829,7 @@ This is where the proposal should be outlined.
 </tr>
 <tr class="even">
 <td><strong>Phase 1: Core Implementation</strong></td>
-<td>July</td>
+<td>August</td>
 <td>16</td>
 <td>8</td>
 <td>Iterator factory functions, unit tests, technical review</td>
@@ -2842,7 +2837,7 @@ This is where the proposal should be outlined.
 </tr>
 <tr class="odd">
 <td><strong>Phase 2: Integration &amp; Testing</strong></td>
-<td>August</td>
+<td>September</td>
 <td>16</td>
 <td>4</td>
 <td><code>foreach</code> &amp; <code>itertools</code> integration, expanded tests</td>
@@ -2850,7 +2845,7 @@ This is where the proposal should be outlined.
 </tr>
 <tr class="even">
 <td><strong>Phase 3: Vignette &amp; Documentation</strong></td>
-<td>Sept</td>
+<td>Oct</td>
 <td>16</td>
 <td>16</td>
 <td>Comprehensive Quarto vignette, updated docs, Oxford visit</td>
@@ -2858,7 +2853,7 @@ This is where the proposal should be outlined.
 </tr>
 <tr class="odd">
 <td><strong>Phase 4: Review &amp; Release</strong></td>
-<td>Oct</td>
+<td>Nov</td>
 <td>16</td>
 <td>4</td>
 <td>CRAN submission, code review, contingency</td>
@@ -2866,7 +2861,7 @@ This is where the proposal should be outlined.
 </tr>
 <tr class="even">
 <td><strong>Phase 5: Publicity &amp; Dissemination</strong></td>
-<td>Nov</td>
+<td>Dec</td>
 <td>8</td>
 <td>4</td>
 <td>Public announcement, CRAN feedback</td>
@@ -2874,7 +2869,7 @@ This is where the proposal should be outlined.
 </tr>
 <tr class="odd">
 <td><strong>Total</strong></td>
-<td>June–Nov</td>
+<td>July–Dec</td>
 <td><strong>80</strong></td>
 <td><strong>44</strong></td>
 <td>Full modernisation + CRAN release</td>
@@ -2891,8 +2886,8 @@ provide at least a high-level description of the implementation.
 Including target dates is really important as you need to be committed
 and the ISC need to have a means of tracking delivery
 -->
-<section id="phase-0-start-up-june-2026-weeks-14-1" class="level3">
-<h3 class="anchored" data-anchor-id="phase-0-start-up-june-2026-weeks-14-1">Phase 0: Start-up (June 2026, Weeks 1–4)</h3>
+<section id="phase-0-start-up-july-2026-weeks-14-1" class="level3">
+<h3 class="anchored" data-anchor-id="phase-0-start-up-july-2026-weeks-14-1">Phase 0: Start-up (July 2026, Weeks 1–4)</h3>
 <ul>
 <li>Establish collaboration infrastructure: GitHub issue tracking, pull request templates, contributor guidelines.</li>
 <li>Review existing <code>partitions</code> codebase: C API, R wrapper functions, test coverage, and GitHub open issues.</li>
@@ -2903,8 +2898,8 @@ and the ISC need to have a means of tracking delivery
 <p><strong>Effort:</strong> 8 hours (Sam Kamperis), 8 hours (Robin Hankin)</p>
 <hr>
 </section>
-<section id="phase-1-core-implementation-july-2026-weeks-58-1" class="level3">
-<h3 class="anchored" data-anchor-id="phase-1-core-implementation-july-2026-weeks-58-1">Phase 1: Core Implementation (July 2026, Weeks 5–8)</h3>
+<section id="phase-1-core-implementation-august-2026-weeks-58-1" class="level3">
+<h3 class="anchored" data-anchor-id="phase-1-core-implementation-august-2026-weeks-58-1">Phase 1: Core Implementation (August 2026, Weeks 5–8)</h3>
 <ul>
 <li>Implement <code>iparts()</code>, <code>irestrictedparts()</code>, <code>idiffparts()</code> factory functions.</li>
 <li>Implement <code>nextElem.partitions_iter()</code> method for each enumeration type.</li>
@@ -2915,8 +2910,8 @@ and the ISC need to have a means of tracking delivery
 <p><strong>Effort:</strong> 16 hours (Sam Kamperis), 8 hours (Robin Hankin)</p>
 <hr>
 </section>
-<section id="phase-2-integration-testing-august-2026-weeks-912-1" class="level3">
-<h3 class="anchored" data-anchor-id="phase-2-integration-testing-august-2026-weeks-912-1">Phase 2: Integration &amp; Testing (August 2026, Weeks 9–12)</h3>
+<section id="phase-2-integration-testing-september-2026-weeks-912-1" class="level3">
+<h3 class="anchored" data-anchor-id="phase-2-integration-testing-september-2026-weeks-912-1">Phase 2: Integration &amp; Testing (September 2026, Weeks 9–12)</h3>
 <ul>
 <li>Integrate with <code>foreach</code> package: test that <code>foreach(part = iparts(n)) %do%</code> and <code>%dopar%</code> work correctly.</li>
 <li>Integrate with <code>itertools</code> package: verify chaining via <code>itertools::ichain()</code>, filtering via <code>ifilter()</code>, etc.</li>
@@ -2927,8 +2922,8 @@ and the ISC need to have a means of tracking delivery
 <p><strong>Effort:</strong> 16 hours (Sam Kamperis), 4 hours (Robin Hankin)</p>
 <hr>
 </section>
-<section id="phase-3-vignette-documentation-september-2026-weeks-1318-1" class="level3">
-<h3 class="anchored" data-anchor-id="phase-3-vignette-documentation-september-2026-weeks-1318-1">Phase 3: Vignette &amp; Documentation (September 2026, Weeks 13–18)</h3>
+<section id="phase-3-vignette-documentation-october-2026-weeks-1318-1" class="level3">
+<h3 class="anchored" data-anchor-id="phase-3-vignette-documentation-october-2026-weeks-1318-1">Phase 3: Vignette &amp; Documentation (October 2026, Weeks 13–18)</h3>
 <ul>
 <li>Write a detailed Quarto vignette (5+ worked examples):
 <ol type="1">
@@ -2946,8 +2941,8 @@ and the ISC need to have a means of tracking delivery
 <p><strong>Effort:</strong> 16 hours (Sam Kamperis), 16 hours (Robin Hankin)</p>
 <hr>
 </section>
-<section id="phase-4-review-release-october-2026-weeks-1922-1" class="level3">
-<h3 class="anchored" data-anchor-id="phase-4-review-release-october-2026-weeks-1922-1">Phase 4: Review &amp; Release (October 2026, Weeks 19–22)</h3>
+<section id="phase-4-review-release-november-2026-weeks-1922-1" class="level3">
+<h3 class="anchored" data-anchor-id="phase-4-review-release-november-2026-weeks-1922-1">Phase 4: Review &amp; Release (November 2026, Weeks 19–22)</h3>
 <ul>
 <li>Code review with Robin Hankin; incorporate feedback.</li>
 <li>Final <code>R CMD check</code> and comprehensive testing.</li>
@@ -2958,8 +2953,8 @@ and the ISC need to have a means of tracking delivery
 <p><strong>Effort:</strong> 16 hours (Sam Kamperis), 4 hours (Robin Hankin)</p>
 <hr>
 </section>
-<section id="phase-5-publicity-dissemination-november-2026-weeks-2326-1" class="level3">
-<h3 class="anchored" data-anchor-id="phase-5-publicity-dissemination-november-2026-weeks-2326-1">Phase 5: Publicity &amp; Dissemination (November 2026, Weeks 23–26)</h3>
+<section id="phase-5-publicity-dissemination-december-2026-weeks-2326-1" class="level3">
+<h3 class="anchored" data-anchor-id="phase-5-publicity-dissemination-december-2026-weeks-2326-1">Phase 5: Publicity &amp; Dissemination (December 2026, Weeks 23–26)</h3>
 <ul>
 <li>Submit to CRAN.</li>
 <li>Address CRAN feedback (if any) and release new package version.</li>
@@ -2993,8 +2988,8 @@ to be shared quarterly on the R Consortium blog.
 <section id="publicity-dissemination" class="level3">
 <h3 class="anchored" data-anchor-id="publicity-dissemination">Publicity &amp; Dissemination</h3>
 <ul>
-<li><strong>ISC Blog Post (Mid-project, ~July 2026):</strong> Summary of modernisation goals and progress.</li>
-<li><strong>Delivery Blog Post (Post-release, ~December 2026):</strong> Technical introduction to the new iterator API, with code examples and benchmarks.</li>
+<li><strong>ISC Blog Post (Mid-project, ~August 2026):</strong> Summary of modernisation goals and progress.</li>
+<li><strong>Delivery Blog Post (Post-release, ~January 2027):</strong> Technical introduction to the new iterator API, with code examples and benchmarks.</li>
 <li><strong>R Community Channels:</strong> Announcements on R Weekly, R Discourse, and relevant social media.</li>
 <li><strong>Conference Consideration:</strong> Abstract submission to useR! 2027 if timeline permits.</li>
 </ul>
@@ -3019,7 +3014,7 @@ out to us.
 -->
 <section id="budget-allocation" class="level3">
 <h3 class="anchored" data-anchor-id="budget-allocation">Budget Allocation</h3>
-<p><strong>Total Funding:</strong> $18,331.21 <strong>Duration:</strong> 6 months (1 June – 30 November 2026)<br>
+<p><strong>Total Funding:</strong> $11,989.98 <strong>Duration:</strong> 6 months (1 July – 31 December 2026)<br>
 <strong>Total Hours:</strong> 124 (Sam Kamperis: 80, Robin Hankin: 44)</p>
 <table class="caption-top table">
 <colgroup>
@@ -3043,7 +3038,7 @@ out to us.
 <tbody>
 <tr class="odd">
 <td><strong>Phase 0: Start-up</strong></td>
-<td>June</td>
+<td>July</td>
 <td>8</td>
 <td>8</td>
 <td>Collaboration infra, design doc, CI setup</td>
@@ -3051,7 +3046,7 @@ out to us.
 </tr>
 <tr class="even">
 <td><strong>Phase 1: Core Implementation</strong></td>
-<td>July</td>
+<td>August</td>
 <td>16</td>
 <td>8</td>
 <td>Iterator factory functions, unit tests, technical review</td>
@@ -3059,7 +3054,7 @@ out to us.
 </tr>
 <tr class="odd">
 <td><strong>Phase 2: Integration &amp; Testing</strong></td>
-<td>August</td>
+<td>September</td>
 <td>16</td>
 <td>4</td>
 <td><code>foreach</code> &amp; <code>itertools</code> integration, expanded tests</td>
@@ -3067,7 +3062,7 @@ out to us.
 </tr>
 <tr class="even">
 <td><strong>Phase 3: Vignette &amp; Documentation</strong></td>
-<td>Sept</td>
+<td>Oct</td>
 <td>16</td>
 <td>16</td>
 <td>Comprehensive Quarto vignette, updated docs, Oxford visit</td>
@@ -3075,7 +3070,7 @@ out to us.
 </tr>
 <tr class="odd">
 <td><strong>Phase 4: Review &amp; Release</strong></td>
-<td>Oct</td>
+<td>Nov</td>
 <td>16</td>
 <td>4</td>
 <td>CRAN submission, code review, contingency</td>
@@ -3083,7 +3078,7 @@ out to us.
 </tr>
 <tr class="even">
 <td><strong>Phase 5: Publicity &amp; Dissemination</strong></td>
-<td>Nov</td>
+<td>Dec</td>
 <td>8</td>
 <td>4</td>
 <td>Public announcement, CRAN feedback</td>
@@ -3091,7 +3086,7 @@ out to us.
 </tr>
 <tr class="odd">
 <td><strong>Total</strong></td>
-<td>June–Nov</td>
+<td>July–Dec</td>
 <td><strong>80</strong></td>
 <td><strong>44</strong></td>
 <td>Full modernisation + CRAN release</td>
@@ -3183,11 +3178,11 @@ thorough understanding going in of what the risks are to delivery
 <section id="progress-checkpoints" class="level3">
 <h3 class="anchored" data-anchor-id="progress-checkpoints">Progress Checkpoints</h3>
 <ul>
-<li><strong>End of June (Milestone 1):</strong> Design doc approved by Robin; CI infrastructure operational; initial test suite in place.</li>
-<li><strong>End of August (Milestone 2–3):</strong> <code>iparts()</code>, <code>irestrictedparts()</code>, <code>idiffparts()</code> factory functions implemented and tested; <code>foreach()</code> integration working.</li>
-<li><strong>End of September (Milestone 3):</strong> <code>itertools</code> integration functional; GitHub issues triaged and addressed.</li>
-<li><strong>End of October (Milestone 4):</strong> Vignette drafted and reviewed; all documentation updated.</li>
-<li><strong>End of November (Milestone 5):</strong> CRAN submission completed; public announcement released.</li>
+<li><strong>End of July (Milestone 1):</strong> Design doc approved by Robin; CI infrastructure operational; initial test suite in place.</li>
+<li><strong>End of September (Milestone 2–3):</strong> <code>iparts()</code>, <code>irestrictedparts()</code>, <code>idiffparts()</code> factory functions implemented and tested; <code>foreach()</code> integration working.</li>
+<li><strong>End of October (Milestone 3):</strong> <code>itertools</code> integration functional; GitHub issues triaged and addressed.</li>
+<li><strong>End of November (Milestone 4):</strong> Vignette drafted and reviewed; all documentation updated.</li>
+<li><strong>End of December (Milestone 5):</strong> CRAN submission completed; public announcement released.</li>
 </ul>
 </section>
 </section>
