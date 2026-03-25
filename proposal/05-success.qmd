@@ -39,11 +39,11 @@ We will track the following metrics throughout the project:
 
 ### Progress Checkpoints
 
-- **End of June (Milestone 1):** Design doc approved by Robin; CI infrastructure operational; initial test suite in place.
-- **End of August (Milestone 2–3):** `iparts()`, `irestrictedparts()`, `idiffparts()` factory functions implemented and tested; `foreach()` integration working.
-- **End of September (Milestone 3):** `itertools` integration functional; GitHub issues triaged and addressed.
-- **End of October (Milestone 4):** Vignette drafted and reviewed; all documentation updated.
-- **End of November (Milestone 5):** CRAN submission completed; public announcement released.
+- **End of July (Milestone 1):** Design doc approved by Robin; CI infrastructure operational; initial test suite in place.
+- **End of September (Milestone 2–3):** `iparts()`, `irestrictedparts()`, `idiffparts()` factory functions implemented and tested; `foreach()` integration working.
+- **End of October (Milestone 3):** `itertools` integration functional; GitHub issues triaged and addressed.
+- **End of November (Milestone 4):** Vignette drafted and reviewed; all documentation updated.
+- **End of December (Milestone 5):** CRAN submission completed; public announcement released.
 
 ## Future Work
 
