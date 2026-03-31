@@ -16,6 +16,7 @@ vignettes/*.pdf
 # File gen artefacts
 *.html
 *.pdf
+*.tex
 
 # My notes
 *_notes.md
