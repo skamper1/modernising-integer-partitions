@@ -23,82 +23,26 @@ It is important to cover:
 
 ## What Is the Problem?
 
-The `partitions` package [@partitionspackage] provides two distinct APIs for enumerating partitions:
-
-1. **Bulk-generation functions** (`parts()`, `restrictedparts()`, `diffparts()`): Generate all partitions in memory as a matrix and return them at once.
-2. **Stepwise iteration** (`firstpart()` + `nextpart()`, etc.): Users write manual `while` loops, maintaining state vectors and calling low-level stepping functions.
-
-Both approaches have critical limitations.
-
-### Combinatorial Explosion & Memory Crashes
-
-For even moderate values of $n$, the number of partitions grows explosively. The partition count function $p(n)$ grows as:
-
-$$p(n) \sim \frac{1}{4n\sqrt{3}} \exp\left(\pi\sqrt{\frac{2n}{3}}\right)$$
-
-Concretely: $p(50) \approx 204$ million partitions; $p(100) \approx 190$ quadrillion. Users attempting `parts(50)` or larger will exhaust RAM and crash their R session. This is not a minor inconvenience, it is a **hard blocker** for realistic combinatorial research.
-
-### Non-Standard Iterator Protocol
-
-The `firstpart()`/`nextpart()` API does not conform to the R ecosystem's standard iterator interface defined by the `iterators` package [@iteratorspackage]. Users cannot:
-
-- Pass partition iterators directly to `foreach()` without custom wrappers.
-- Chain partition iterators with `itertools` utilities like `ichain()`, `ifilter()`, or `izip()` [@itertoolspackage].
-- Use partition enumeration in standard parallel frameworks designed for iterators.
-
-Instead, users write verbose, error-prone `while` loops:
-
-```r
-part <- firstpart(20)
-results <- list()
-while (!islastpart(part)) {
-  results[[length(results) + 1]] <- process(part)
-  part <- nextpart(part, check=FALSE)
-}
-```
-
-This pattern is tedious, hard to maintain, and incompatible with lazy evaluation and parallelisation idioms.
+The `partitions` package [@partitionspackage] currently offers either bulk-generation functions (`parts()`, `restrictedparts()`, `diffparts()`) that materialise all results in memory, or low-level stepwise functions (`firstpart()`/`nextpart()`) that require manual state management. This is increasingly misaligned with modern R workflows. Partition counts grow explosively, so even moderate inputs can become impractical with bulk generation: for example, $p(50)$ is approximately 204 million and $p(100)$ is approximately 190 quadrillion. At the same time, the manual stepping API does not implement the standard `iterators` interface [@iteratorspackage], so users cannot use partition streams directly in `foreach`, `itertools` [@itertoolspackage], or related parallel tooling without custom wrappers.
 
 ## Who Is Affected?
 
-With **1.3 million total downloads** and **6,000–8,000 monthly users**, the `partitions` package serves:
-
-- **Researchers** in combinatorics and number theory performing exhaustive enumeration.
-- **Statisticians** using partitions for resampling and bootstrap methods.
-- **Operations researchers** solving integer partition problems.
-- **Parallel computing practitioners** seeking to distribute combinatorial tasks across clusters.
+With **1.3 million total downloads** and **6,000–8,000 monthly users**, the package affects researchers, statisticians, operations researchers, and practitioners who need scalable combinatorial workflows.
 
 ## Why Is This a Problem?
 
-1. **Ecosystem Misalignment:** Modern R functional programming (via `foreach`, `itertools`, `furrr` [@furrrpackage]) assumes standard iterator interfaces. `partitions` is an exception, creating friction and requiring custom adapters.
-2. **Memory Degradation:** Researchers working with realistic problem sizes cannot use convenient bulk-generation APIs and must resort to manual state management, introducing bugs and reduced code clarity.
-3. **Concurrency Barriers:** Parallel frameworks cannot transparently distribute work over partition enumerations because the non-standard API provides no standard way to yield values on demand.
+1. **Ecosystem misalignment:** standard R tooling (`foreach`, `itertools`, `furrr` [@furrrpackage]) expects `nextElem`-style iterators.
+2. **Memory constraints:** practical inputs are unsafe with full matrix materialisation.
+3. **Concurrency barriers:** non-standard iteration blocks straightforward parallel and distributed use.
 
 ## What Will Solving This Enable?
 
-Implementing standard iterators will:
-
-- **Enable lazy evaluation:** Users iterate over arbitrarily large partition streams without materialising all values in memory.
-- **Unlock parallel workflows:** Standard iterators integrate seamlessly with `foreach()`, `parallel::makeCluster()`, and `furrr`.
-- **Improve interoperability:** Partition iterators can be composed with other `itertools` operations (filtering, zipping, chaining).
-- **Reduce cognitive load:** Users write familiar, standard R code instead of custom loops.
+Implementing standard iterators will enable lazy evaluation, unlock parallel workflows, improve interoperability with iterator combinators, and let users write familiar R code instead of bespoke control loops.
 
 ## Existing Work & Precedent
 
-Standard iterator support is well-established throughout the R ecosystem:
-
-- The `iterators` package [@iteratorspackage] defines the S3 `iter` class and `nextElem` generic method.
-- The `itertools` package [@itertoolspackage] provides composable combinators (`chain`, `filter`, `zip`) that work with any standard iterator.
-- Packages like `foreach` and `furrr` assume standard iterator interfaces for parallel iteration.
-
-The `partitions` package simply needs to align with these established conventions. The existing `firstpart()`/`nextpart()` API will remain for backwards compatibility; we will **add** (not replace) the standard interface.
+Standard iterator support is already established in the R ecosystem. This project brings `partitions` into that convention while preserving the existing `firstpart()`/`nextpart()` API for backward compatibility.
 
 ## Competitive Landscape
 
-Several other R packages provide combinatorial generation and partition enumeration. Understanding their scope clarifies the gap this proposal addresses.
-
-**`RcppAlgos`** [@rcppalgospackage; @rcppalgos-benchmarks] provides highly optimised C++ routines for combinatorics, integer partitions, and number theory. Its `partitionsGeneral()` and `partitionsIter()` functions are among the fastest available in R, as documented in published benchmarks [@rcppalgos-benchmarks]. However, `RcppAlgos` exposes partitions through a custom S4 class (`Partitions-class`) with proprietary iteration methods (`@nextIter`, `@prevIter`, `@randomAccess`) that do not implement the standard `iterators` S3 protocol. Passing a `RcppAlgos` iterator to `foreach()` or composing it with `itertools` combinators requires bespoke wrapper code — the same friction this proposal resolves for `partitions`. Additionally, `RcppAlgos` focuses on numeric constrained-sum partitions and does not cover the set-partition (`setparts()`), block-partition (`blockparts()`), or multiset-partition semantics unique to `partitions`.
-
-**`arrangements`** [@arrangementspackage] provides memory-efficient generators and iterators for permutations, combinations, integer partitions, and compositions, with its own `ipartitions()` function. Like `RcppAlgos`, `arrangements` exposes a package-specific API (`getnext()`, `collect()`) rather than the standard `nextElem` interface, so partition iterators cannot be passed directly to `foreach` or `itertools` without custom adaptation.
-
-**Our approach is complementary, not competitive.** This proposal does not aim to replicate the compiled C++ performance of `RcppAlgos` or `arrangements`. Instead, it modernises the *interface layer* of the `partitions` package — bringing its unique partition types in line with the standard `iterators` protocol so they integrate natively with `foreach`, `furrr`, and `itertools`, an interoperability benefit that neither alternative currently provides.
+Related packages such as `RcppAlgos` [@rcppalgospackage; @rcppalgos-benchmarks] and `arrangements` [@arrangementspackage] provide strong combinatorial tooling, but use package-specific iteration interfaces. Our approach is complementary: we modernise the `partitions` interface layer so its unique partition semantics integrate directly with standard iterator tooling rather than through bespoke adapters.
