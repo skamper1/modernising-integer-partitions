@@ -18,6 +18,6 @@ We will track the following headline metrics throughout the project:
 | **Coverage** | >= 90% of new iterator code tested | `covr` report |
 | **Checks** | `devtools::check()` and `R CMD check` pass cleanly | CI and CRAN dry-run |
 | **Interop** | `foreach()` and `itertools` examples run without error | Tests and vignette examples |
-| **Memory** | Lazy iteration materially outperforms bulk generation for large n | Benchmark scripts |
+| **Memory** | Peak memory of lazy iteration is <= 10% of equivalent bulk generation for large n | Benchmark scripts |
 
 Further roadmap detail is provided in the companion detailed plan (`project-plan.qmd`).
