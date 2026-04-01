@@ -20,4 +20,3 @@ We will track the following headline metrics throughout the project:
 | **Interop** | `foreach()` and `itertools` examples run without error | Tests and vignette examples |
 | **Memory** | Peak memory of lazy iteration is <= 10% of equivalent bulk generation for large n | Benchmark scripts |
 
-Further roadmap detail is provided in the companion detailed plan (`project-plan.qmd`).
