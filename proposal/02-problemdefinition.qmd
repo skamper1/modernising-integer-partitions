@@ -23,7 +23,7 @@ It is important to cover:
 
 ## What Is the Problem?
 
-The `partitions` package [@partitionspackage] currently offers either bulk-generation functions (`parts()`, `restrictedparts()`, `diffparts()`) that materialise all results in memory, or low-level stepwise functions (`firstpart()`/`nextpart()`) that require manual state management. This is increasingly misaligned with modern R workflows. Partition counts grow explosively, so even moderate inputs can become impractical with bulk generation: for example, $p(50)$ is approximately 204 million and $p(100)$ is approximately 190 quadrillion. At the same time, the manual stepping API does not implement the standard `iterators` interface [@iteratorspackage], so users cannot use partition streams directly in `foreach`, `itertools` [@itertoolspackage], or related parallel tooling without custom wrappers.
+The `partitions` package [@partitionspackage] currently offers either bulk-generation functions (`parts()`, `restrictedparts()`, `diffparts()`) that materialise all results in memory, or low-level stepwise functions (`firstpart()`/`nextpart()`) that require manual state management. This is increasingly misaligned with modern R workflows. Partition counts grow explosively, so even moderate inputs can become impractical with bulk generation: for example, $p(50) = 204,226$ and $p(100)$ is approximately 190 million. At the same time, the manual stepping API does not implement the standard `iterators` interface [@iteratorspackage], so users cannot use partition streams directly in `foreach`, `itertools` [@itertoolspackage], or related parallel tooling without custom wrappers.
 
 ## Who Is Affected?
 

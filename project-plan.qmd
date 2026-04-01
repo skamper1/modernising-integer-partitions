@@ -102,7 +102,7 @@ This project is complementary, not competitive with these packages. It targets i
 | 20 | 627 | Full matrix materialised | O(n) peak memory |
 | 30 | 5,604 | Full matrix materialised | O(n) peak memory |
 | 50 | 204,226 | Often memory-prohibitive | Viable |
-| 100 | ~1.9 x 10^14 | Infeasible | Viable |
+| 100 | ~1.9 x 10^9 | Infeasible | Viable |
 
 - Measure with `bench::mark(memory = TRUE)` [@benchpackage] together with RSS-style profiling.
 - Record outcomes for reproducibility and include rendered results in package documentation.
