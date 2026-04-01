@@ -16,8 +16,12 @@ jobs:
         uses: quarto-dev/quarto-actions/setup@v2
         with:
           tinytex: true
-          
+      # Render the second file
+      - name: Render second doc
+        run: quarto render project-plan.qmd
+        
       - name: Render and publish to GitHub Pages
         uses: quarto-dev/quarto-actions/publish@v2
         with:
           target: gh-pages
+          path: "isc-proposal.qmd"
