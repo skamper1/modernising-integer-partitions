@@ -1,0 +1,196 @@
+---
+title: "Detailed Project Plan: Modernising Integer Partitions"
+author:
+  - name: Sam Kamperis
+    orcid: 0000-0002-0539-6994
+    affiliations:
+      - "Oxford Brookes University"
+  - name: Robin Hankin
+    orcid: 0000-0001-5982-0415
+    affiliations:
+      - "University of Stirling"
+date: today
+date-format: iso
+format:
+  html:
+    embed-resources: true
+  hikmah-pdf:
+    geometry:
+      - left=1.25in
+      - right=1.25in
+bibliography: references.bib
+---
+
+# Purpose and Scope
+
+This document is a standalone companion to the five-page ISC proposal in [ISC Proposal](https://skamper1.github.io/modernising-integer-partitions/). It records the implementation approach, validation plan, delivery structure, and risk controls that sit behind the concise proposal narrative. Its purpose is to preserve operational detail without weakening the readability of the core funding case.
+
+# Detailed Technical Approach
+
+## Architecture
+
+### R-level design
+
+- `iparts(n)` creates an S3 object of class `c("partitions_iter", "abstractiter", "iter")`.
+- Iterator state is represented by a partition vector (`state`), target integer (`n`), and enumeration type (`type`).
+- `nextElem.partitions_iter()` yields the current state, advances the iterator closure state, and throws `StopIteration` when exhausted.
+
+### C-level integration
+
+- Existing stepping primitives (`c_nextpart()`, `c_nextrestrictedpart()`, and related functions) are reused unchanged.
+- The project modernises interface behaviour rather than enumeration internals.
+- Re-entrant behaviour is preserved because each iterator instance carries independent state.
+
+### Interoperability design
+
+- Iterator instances are returned as standard `iter`-compatible objects.
+- `foreach()` and `itertools` can consume iterators through standard `nextElem` behaviour.
+- Iterator coexistence is guaranteed by per-instance closure environments.
+
+## Minimum Viable Product
+
+1. S3 class `partitions_iter` with stable state representation.
+2. `nextElem.partitions_iter()` implementations for core partition types.
+3. Factory functions `iparts()`, `irestrictedparts()`, `idiffparts()`.
+4. Tests proving equivalence with bulk-generation outputs and independent iterator coexistence.
+
+## Illustrative Workflows
+
+```r
+library(partitions)
+library(foreach)
+
+# Serial enumeration
+it <- iparts(15)
+while (!islastpart(it$state)) {
+  print(nextElem(it))
+}
+
+# Parallel iteration
+results <- foreach(part = iparts(20), .combine = c) %dopar% {
+  sum(part)
+}
+```
+
+# Competitive Landscape (Detailed)
+
+Several packages provide strong combinatorial functionality, but interoperability with standard iterator tooling remains uneven.
+
+## RcppAlgos
+
+`RcppAlgos` [@rcppalgospackage; @rcppalgos-benchmarks] provides high-performance C++ routines for combinatorics and integer partitions. Its partition functionality is exposed through custom S4 iterator mechanics (`Partitions-class` with custom methods), so direct usage in `foreach` or `itertools` requires an adaptation layer.
+
+## arrangements
+
+`arrangements` [@arrangementspackage] provides efficient generators including integer partitions, but uses package-specific iteration methods (`getnext()`, `collect()`) rather than `nextElem`-style interoperability.
+
+## Positioning
+
+This project is complementary, not competitive with these packages. It targets interface modernisation for `partitions` so its unique partition semantics can be used natively in standard iterator pipelines.
+
+# Benchmarking and Validation Protocol
+
+## Objectives
+
+1. Validate memory safety benefits of lazy iteration versus bulk generation.
+2. Quantify wrapper overhead relative to existing manual stepping loops.
+
+## Memory efficiency protocol
+
+| Target n | Partitions p(n) | Bulk `parts(n)` expectation | Lazy `iparts(n)` expectation |
+|---|---|---|---|
+| 20 | 627 | Full matrix materialised | O(n) peak memory |
+| 30 | 5,604 | Full matrix materialised | O(n) peak memory |
+| 50 | 204,226 | Often memory-prohibitive | Viable |
+| 100 | ~1.9 x 10^8 | Infeasible | Viable |
+
+- Measure with `bench::mark(memory = TRUE)` [@benchpackage] together with RSS-style profiling.
+- Record outcomes for reproducibility and include rendered results in package documentation.
+
+## Iterator overhead protocol
+
+- Compare `nextElem(iparts(n))` to manual `nextpart(part, check = FALSE)` stepping loops.
+- Run at least 30 repetitions per condition using `bench::mark()`.
+- Report per-step runtime distributions and relative overhead.
+
+## Reproducibility
+
+- Store benchmark scripts and raw outputs in `inst/benchmarks/`.
+- Include benchmark narrative and interpretation in the package vignette.
+
+# Risk Register and Assumptions
+
+## Assumptions
+
+1. Existing C-level stepping logic is mature and trusted.
+2. The `iterators` API remains stable across the delivery window.
+3. Iterator state isolation via closure environments behaves predictably in serial and parallel contexts.
+4. `iterators` is available as an imported dependency.
+
+## Failure Modes and Mitigation
+
+| Failure Mode | Likelihood | Mitigation |
+|---|---|---|
+| Wrapper overhead is higher than expected | Low | Benchmark early, profile hot paths, and optimise object updates if needed |
+| Edge-case iterator behaviour diverges from bulk output | Medium | Expand edge-case test matrices and compare generated outputs directly |
+| Parallel backend serialisation causes iterator friction | Low | Add backend-specific tests and document validated patterns |
+| Restricted partition edge cases regress | Medium | Add targeted tests (`m > n`, zero/one boundaries, atypical constraints) |
+
+# Detailed Delivery Plan
+
+## Timeline and effort by phase
+
+| Phase | Dates | Sam (hrs) | Robin (hrs) | Deliverables |
+|---|---|---|---|---|
+| Phase 0: Start-up | July 2026 | 8 | 8 | Scope finalisation, collaboration setup, CI baseline |
+| Phase 1: Core implementation | August 2026 | 16 | 8 | Iterator class/methods, factory functions, core tests |
+| Phase 2: Integration and testing | September 2026 | 16 | 4 | `foreach`/`itertools` integration, expanded tests |
+| Phase 3: Vignette and docs | October 2026 | 16 | 16 | Quarto vignette, examples, package docs updates |
+| Phase 4: Review and release | November 2026 | 16 | 4 | Final review, checks, CRAN submission readiness |
+| Phase 5: Dissemination | December 2026 | 8 | 4 | CRAN follow-up and communication |
+| **Total** | **July-December 2026** | **80** | **44** | **Modernised package interface and release** |
+
+## Month-end checkpoints
+
+- End of July: design sign-off, CI running, initial tests established.
+- End of September: iterator factories complete and core integration tests passing.
+- End of October: vignette draft complete and interoperability examples validated.
+- End of November: CRAN-check readiness achieved and review feedback incorporated.
+- End of December: submission completed and community dissemination started.
+
+## Funding summary
+
+- Total funding requested: $8,374.74
+- Total effort: 124 hours
+- Duration: 6 months (1 July to 31 December 2026)
+
+# Expanded Success Framework
+
+| Metric | Success Criterion | Measurement Method |
+|---|---|---|
+| Code coverage | >= 90% of new iterator code | `covr` reports |
+| CRAN compliance | Zero errors/warnings in `devtools::check()` and `R CMD check` | CI plus local validation |
+| Interoperability | `foreach` and `itertools` examples run without error | Tests and vignette execution |
+| Memory efficiency | Lazy iteration uses <10% memory of bulk for large n | Benchmarks and profiling logs |
+| Issue resolution | >= 80% iterator-related issues resolved/documented | GitHub issue audit |
+| Release outcome | New version accepted by CRAN | CRAN acceptance confirmation |
+
+# Future Roadmap
+
+## Short-term
+
+- Extend iterator support to additional `partitions` entry points such as `setparts()` and `blockparts()` if demand warrants.
+- Publish user-oriented guidance for practical iterator workflows.
+
+## Medium-term
+
+- Develop iterator-aware sampling patterns.
+- Deepen compatibility examples for `furrr` and related functional tooling.
+
+## Long-term
+
+- Explore serialized iterator state for resume-after-interruption workflows.
+- Assess distributed execution pathways for very large combinatorial workloads.
+
+::: refs
+:::

@@ -7,32 +7,18 @@ It should be a comprehensive high-level overview that captures the essence of th
 
 ## Overview
 
-The `partitions` package [@partitionspackage] is a widely-used R utility for enumerating integer partitions and related combinatorial structures. With over 1.3 million downloads, 6000–8000 monthly users, and 36 dependencies, it is critical R infrastructure. However, the package suffers from two key limitations: (1) bulk-generation APIs cause catastrophic memory exhaustion for large problems, and (2) the existing iterator API is non-standard, preventing seamless integration with modern R ecosystems (`foreach`, `itertools` [@itertoolspackage], `parallel`).
-
-This proposal seeks to modernise the `partitions` package by implementing the standard S3 `iterators` protocol [@iteratorspackage], enabling lazy evaluation, efficient memory usage, and interoperability with parallel computing frameworks. We will create a new S3 class `partitions_iter` with `nextElem` methods for the core enumeration functions, along with comprehensive documentation and vignettes demonstrating practical use cases.
+The `partitions` package [@partitionspackage] is widely used R infrastructure, but its current APIs either materialise all partitions in memory or require non-standard manual iteration. This proposal will add a standard S3 iterator interface [@iteratorspackage], enabling lazy evaluation, lower memory use, and direct interoperability with tools such as `foreach` and `itertools` [@itertoolspackage]. The work is low-risk and high-leverage because it modernises the interface layer while preserving the package's established enumeration logic.
 
 ## Project Scope
 
-**Primary Deliverable:** An S3 `partitions_iter` class providing scalable, lazy iteration that conforms to the `iterators` interface, enabling direct integration with `foreach()` and `itertools` [@itertoolspackage].
+**Primary deliverable:** an S3 `partitions_iter` class conforming to the `iterators` interface.
 
-**Secondary Deliverables:**
-
-- Comprehensive Quarto vignette with 5+ worked examples: serial iteration, `foreach()` parallelisation, `itertools` chaining, memory-efficiency comparisons.
-- Full test suite covering concurrent iterator behaviour, edge cases, and GitHub issue resolution.
-- CRAN-ready code and final review with Robin Hankin.
+**Secondary deliverables:** documentation, worked examples, interoperability tests, and CRAN-ready release preparation.
 
 ## Budget & Timeline
 
 
-We request **$11,989.98** to fund **124 hours** of development. This is a joint costing from Oxford Brookes University and the University of Stirling.
-
-Sam Kamperis (Oxford Brookes) would be allocated 80 hours for the development. Robin Hankin (Stirling) would be allocated 44 hours.
-
-| Item | Cost (USD) |
-|------|------------|
-| Sam Kamperis 80 hours            | **$5,206.27** |
-| Robin Hankin 44 hours            | **$6,783.71**  |
-| **Total**                        | **$11,989.98** |
+We request **$8,374.74** to fund **124 hours** of development over six months (July-December 2026), jointly delivered by Oxford Brookes University and the University of Stirling.
 
 ## Team
 
@@ -40,4 +26,4 @@ The project is led by the grant applicant (9.7% FTE over 6 months) with **Robin 
 
 ## Expected Impact
 
-This modernisation unlocks new use cases: practitioners can now leverage the package seamlessly within modern R functional pipelines and parallel frameworks, enabling applications such as high-throughput research tasks in operations research, cryptography, and scientific computing. The new iterator interface allows direct integration with tools like `foreach`, `future`, and `itertools`, supporting reproducible research, teaching, and complex computational workflows that were previously impractical. Previously, workarounds required verbose, error-prone custom code, discouraging adoption in teaching and research, and the lack of standard iterator support prevented the package’s use in parallel and distributed computing, limiting its utility in modern data science workflows.
+This modernisation will make `partitions` usable in contemporary iterator and parallel workflows for its 1.3 million-download user base, reducing memory risk and replacing bespoke iteration code with standard, composable workflows.

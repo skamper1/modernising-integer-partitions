@@ -10,107 +10,14 @@ This is where the proposal should be outlined.
 
 ## Overview
 
-We will modernise the `partitions` package [@partitionspackage] by implementing the standard S3 `iterators` protocol [@iteratorspackage], enabling lazy, memory-efficient enumeration of partitions with seamless integration into the modern R ecosystem. The core deliverable is a new `partitions_iter` S3 class providing the `nextElem` method, allowing users to pass partition enumerations directly into `foreach()` loops, `itertools` [@itertoolspackage] combinators, and parallel frameworks.
+We will modernise the `partitions` package [@partitionspackage] by implementing the standard S3 `iterators` protocol [@iteratorspackage]. The core deliverable is a new `partitions_iter` S3 class with `nextElem`, allowing partition enumerations to be used directly in `foreach()` loops, `itertools` [@itertoolspackage] pipelines, and parallel workflows. The solution preserves existing APIs and wraps the current stepping logic rather than replacing it, which keeps the implementation low-risk and compatible with existing users.
 
-The solution preserves all existing APIs for backwards compatibility while adding a thin, well-tested layer that conforms to established iterator conventions. This approach minimises risk: we leverage the battle-tested `firstpart()`/`nextpart()` enumeration logic rather than replacing it, and we add comprehensive documentation and examples to guide users.
+## Delivery
 
-## Detail
-
-### Minimum Viable Product
-
-A working MVP consists of:
-
-1. **S3 class `partitions_iter`** with fields `state` (current partition vector), `n` (the target integer), and `type` (enumeration type: "unrestricted", "restricted", "distinct", etc.).
-2. **Method `nextElem.partitions_iter()`** that calls the appropriate stepping function (`nextpart()`, `nextdiffpart()`, etc.), returns the current state, advances state via the `<<-` operator, and throws `'StopIteration'` when exhausted.
-3. **Factory functions** `iparts()`, `irestrictedparts()`, `idiffparts()` that return an iterator (S3 object) for lazy enumeration.
-4. **Basic `testthat` [@testthatpackage] tests** verifying that iterators produce the same results as bulk-generation functions, and that multiple iterators coexist without state collision.
-
-Example usage:
-
-```r
-library(partitions)
-library(foreach)
-
-# Serial enumeration
-it <- iparts(15)
-while (!islastpart(it$state)) {
-  print(nextElem(it))
-}
-
-# Parallel iteration with foreach
-results <- foreach(part = iparts(20), .combine = c) %dopar% {
-  sum(part)  # Example: sum each partition
-}
-```
-
-### Architecture
-
-**R-level:**
-- `iparts(n)` → creates an S3 object of class `c("partitions_iter", "abstractiter", "iter")`
-- Object stores `state` (current partition vector), `n`, and `type`
-- `nextElem.partitions_iter()` closure uses `<<-` to mutate state in the enclosing environment
-
-**C-level:**
-- No changes required; existing `c_nextpart()`, `c_nextrestrictedpart()`, etc. are reused as-is
-- These functions already provide re-entrant state mutation (each partition vector is independent)
-
-**Integration:**
-- The `iter()` generic method (inherited from `iterators` package) returns the iterator itself
-- `foreach()` and `itertools` function detect the `iter` class and call `nextElem()` in a loop
-- State isolation is automatic: each call to `iparts()` creates a new closure with its own `state` variable
-
-### Benchmarking & Efficiency Methodology
-
-To substantiate the memory-efficiency claims in this proposal and to validate iterator call overhead, we will produce a reproducible benchmark suite included in the package vignette and deposited in `inst/benchmarks/`. Benchmarks focus on two dimensions most relevant to the proposal goals. We do not benchmark against `RcppAlgos` [@rcppalgospackage] or `arrangements` [@arrangementspackage] for raw generation throughput: those packages use compiled C++ routines operating in a different performance tier, and raw speed is not the objective here.
-
-**Memory efficiency — bulk vs. lazy generation:**
-
-| Target $n$ | Partitions $p(n)$ | Bulk `parts(n)` | Lazy `iparts(n)` |
-|---|---|---|---|
-| 20  | 627                          | Full matrix in memory          | O(n) peak, constant |
-| 30  | 5,604                        | Full matrix in memory          | O(n) peak, constant |
-| 50  | 204,226                      | Typically exceeds available RAM | Viable              |
-| 100 | $\approx 1.9 \times 10^{14}$ | Infeasible                     | Viable              |
-
-Memory profiling will use `bench::mark(memory = TRUE)` [@benchpackage] together with RSS measurements via `profmem`. For $n \geq 50$, bulk generation is expected to crash or exhaust available memory, providing direct empirical evidence for the memory-safety motivation of this work.
-
-**Iterator call overhead — new interface vs. existing stepping API:**
-
-We will compare the per-step time of `nextElem(iparts(n))` against the equivalent `nextpart(part, check = FALSE)` manual loop. Both paths invoke the same underlying C-level enumeration logic, so overhead from the S3 wrapper layer is expected to be negligible. Results will be reported using `bench::mark()` over at least 30 repetitions per condition.
-
-**Reproducibility:** Benchmark scripts and raw results will be committed to `inst/benchmarks/` and rendered in a vignette (memory-efficiency comparison).
-
-### Assumptions
-
-1. **The C-level enumeration logic is correct and mature.** We are not reimplementing it; only wrapping it.
-2. **The `iterators` package API is stable.** (It is; the package is mature and widely used.)
-3. **Users have installed `iterators` as a dependency.** (We will add it to `DESCRIPTION` with `Imports: iterators`.)
-4. **Multiple iterators can coexist without state collision.** (They can, because each iterator closure has its own environment.)
-
-### Failure Modes & Mitigation
-
-| Failure Mode | Likelihood | Mitigation |
-|---|---|---|
-| Iterator state mutations are slow due to copy-on-modify semantics | Low | Partition vectors are relatively small (< 1000 elements typically); overhead is negligible. |
-| Users expect `stop('StopIteration')` instead of `error()` | Low | `nextElem()` from `iterators` package already standardises this; we follow the convention. |
-| Parallel workers cannot access iterator closures | Low | Each worker receives a serialised copy of the iterator object (state vector, n, type); no shared mutable state. |
-| Restrictedparts edge cases fail (e.g., `m > n`) | Medium | Comprehensive unit tests; review existing test coverage; coordinate with Robin for edge-case validation. |
-
-### External Dependencies
-
-- **`iterators`** (CRAN): S3 class definitions and `nextElem` generic. Must be added to `Imports:` in `DESCRIPTION`.
-- **`foreach`** (CRAN, optional): User convenience for parallel enumeration. Not a hard dependency.
-- **`itertools`** (CRAN, optional): User convenience for composing iterators. Not a hard dependency.
-- **`testthat`** (CRAN, existing dev dependency): Test infrastructure.
-
-All dependencies are mature, actively maintained, and widely adopted. No risk of ecosystem instability.
+The minimum viable implementation includes a `partitions_iter` class, `nextElem.partitions_iter()`, and factory functions `iparts()`, `irestrictedparts()`, and `idiffparts()`, together with `testthat` [@testthatpackage] coverage demonstrating equivalence with bulk-generation outputs and independent iterator coexistence. We will benchmark bulk versus lazy memory behaviour and confirm interoperability with `foreach` and `itertools`. Detailed architecture, benchmark protocols, and risk controls are provided in the companion plan (`project-plan.qmd`).
 
 ---
 
 ## Evidence of Impact
 
-![Monthly Downloads of the partitions package](partitions_download_stats.png)
-
-The plot above demonstrates the `partitions` package's significant and sustained user adoption. With **~1.3 million cumulative downloads** and **6,000–8,000 monthly active users**, the package is a foundational tool in the R ecosystem. This level of usage—comparable to well-established data manipulation and statistical packages—justifies investment in modernising its infrastructure to integrate with contemporary R practices (lazy evaluation, functional programming, parallelisation).
-
-Users across combinatorics research, statistics, operations research, and scientific computing depend on this package. Enabling standard iterator support will unlock new use cases and remove artificial barriers to productivity for researchers working with large combinatorial spaces.
+With **~1.3 million cumulative downloads** and **6,000–8,000 monthly active users**, `partitions` is established infrastructure in the R ecosystem. Standard iterator support therefore offers ecosystem-wide value: it improves usability for large combinatorial workflows without disrupting existing user code.
