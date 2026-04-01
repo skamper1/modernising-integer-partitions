@@ -5,13 +5,13 @@ Delivery is structured across six phases over six months (July-December 2026). T
 
 | Phase | Duration | Key Deliverables | Effort |
 |---|---|---|---|
-| Start-up | July | Collaboration setup, scope finalization, CI baseline | 16 hrs |
+| Start-up | July | Collaboration setup, scope finalisation, CI baseline | 16 hrs |
 | Core implementation | August | `iparts()`, `irestrictedparts()`, `idiffparts()`, `nextElem` methods, core tests | 24 hrs |
 | Integration and testing | September | `foreach` and `itertools` integration, expanded tests | 20 hrs |
 | Vignette and documentation | October | Quarto vignette, examples, README and docs updates | 32 hrs |
 | Review and release | November | Final review, issue triage, CRAN submission preparation | 20 hrs |
 | Publicity and dissemination | December | CRAN follow-up and public communication | 12 hrs |
-| **Total** | **July-December 2026** | **Modernized iterator interface and release** | **124 hrs** |
+| **Total** | **July-December 2026** | **Modernised iterator interface and release** | **124 hrs** |
 
 ## Budget Summary
 
@@ -21,7 +21,7 @@ Delivery is structured across six phases over six months (July-December 2026). T
 
 ## Availability and Dissemination
 
-All outputs remain under the package's GPL-3 license. Development and review will be conducted via the official GitHub repository with transparent issue and pull-request tracking. Dissemination includes project updates during delivery and a post-release technical communication to the R community.
+All outputs remain under the package's GPL-3 licence. Development and review will be conducted via the official GitHub repository with transparent issue and pull-request tracking. Dissemination includes project updates during delivery and a post-release technical communication to the R community.
 
 
 

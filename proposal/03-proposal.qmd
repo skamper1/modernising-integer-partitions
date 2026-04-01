@@ -14,7 +14,7 @@ We will modernise the `partitions` package [@partitionspackage] by implementing 
 
 ## Delivery
 
-The minimum viable implementation includes a `partitions_iter` class, `nextElem.partitions_iter()`, and factory functions `iparts()`, `irestrictedparts()`, and `idiffparts()`, together with `testthat` [@testthatpackage] coverage demonstrating equivalence with bulk-generation outputs and independent iterator coexistence. We will benchmark bulk versus lazy memory behavior and confirm interoperability with `foreach` and `itertools`. Detailed architecture, benchmark protocols, and risk controls are provided in the companion plan (`project-plan.qmd`).
+The minimum viable implementation includes a `partitions_iter` class, `nextElem.partitions_iter()`, and factory functions `iparts()`, `irestrictedparts()`, and `idiffparts()`, together with `testthat` [@testthatpackage] coverage demonstrating equivalence with bulk-generation outputs and independent iterator coexistence. We will benchmark bulk versus lazy memory behaviour and confirm interoperability with `foreach` and `itertools`. Detailed architecture, benchmark protocols, and risk controls are provided in the companion plan (`project-plan.qmd`).
 
 ---
 

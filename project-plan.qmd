@@ -38,13 +38,13 @@ This document is a standalone companion to the five-page ISC proposal in [ISC Pr
 ### C-level integration
 
 - Existing stepping primitives (`c_nextpart()`, `c_nextrestrictedpart()`, and related functions) are reused unchanged.
-- The project modernises interface behavior rather than enumeration internals.
-- Re-entrant behavior is preserved because each iterator instance carries independent state.
+- The project modernises interface behaviour rather than enumeration internals.
+- Re-entrant behaviour is preserved because each iterator instance carries independent state.
 
 ### Interoperability design
 
 - Iterator instances are returned as standard `iter`-compatible objects.
-- `foreach()` and `itertools` can consume iterators through standard `nextElem` behavior.
+- `foreach()` and `itertools` can consume iterators through standard `nextElem` behaviour.
 - Iterator coexistence is guaranteed by per-instance closure environments.
 
 ## Minimum Viable Product
@@ -99,8 +99,8 @@ This project is complementary, not competitive with these packages. It targets i
 
 | Target n | Partitions p(n) | Bulk `parts(n)` expectation | Lazy `iparts(n)` expectation |
 |---|---|---|---|
-| 20 | 627 | Full matrix materialized | O(n) peak memory |
-| 30 | 5,604 | Full matrix materialized | O(n) peak memory |
+| 20 | 627 | Full matrix materialised | O(n) peak memory |
+| 30 | 5,604 | Full matrix materialised | O(n) peak memory |
 | 50 | 204,226 | Often memory-prohibitive | Viable |
 | 100 | ~1.9 x 10^14 | Infeasible | Viable |
 
@@ -131,9 +131,9 @@ This project is complementary, not competitive with these packages. It targets i
 
 | Failure Mode | Likelihood | Mitigation |
 |---|---|---|
-| Wrapper overhead is higher than expected | Low | Benchmark early, profile hot paths, and optimize object updates if needed |
-| Edge-case iterator behavior diverges from bulk output | Medium | Expand edge-case test matrices and compare generated outputs directly |
-| Parallel backend serialization causes iterator friction | Low | Add backend-specific tests and document validated patterns |
+| Wrapper overhead is higher than expected | Low | Benchmark early, profile hot paths, and optimise object updates if needed |
+| Edge-case iterator behaviour diverges from bulk output | Medium | Expand edge-case test matrices and compare generated outputs directly |
+| Parallel backend serialisation causes iterator friction | Low | Add backend-specific tests and document validated patterns |
 | Restricted partition edge cases regress | Medium | Add targeted tests (`m > n`, zero/one boundaries, atypical constraints) |
 
 # Detailed Delivery Plan
@@ -142,13 +142,13 @@ This project is complementary, not competitive with these packages. It targets i
 
 | Phase | Dates | Sam (hrs) | Robin (hrs) | Deliverables |
 |---|---|---|---|---|
-| Phase 0: Start-up | July 2026 | 8 | 8 | Scope finalization, collaboration setup, CI baseline |
+| Phase 0: Start-up | July 2026 | 8 | 8 | Scope finalisation, collaboration setup, CI baseline |
 | Phase 1: Core implementation | August 2026 | 16 | 8 | Iterator class/methods, factory functions, core tests |
 | Phase 2: Integration and testing | September 2026 | 16 | 4 | `foreach`/`itertools` integration, expanded tests |
 | Phase 3: Vignette and docs | October 2026 | 16 | 16 | Quarto vignette, examples, package docs updates |
 | Phase 4: Review and release | November 2026 | 16 | 4 | Final review, checks, CRAN submission readiness |
 | Phase 5: Dissemination | December 2026 | 8 | 4 | CRAN follow-up and communication |
-| **Total** | **July-December 2026** | **80** | **44** | **Modernized package interface and release** |
+| **Total** | **July-December 2026** | **80** | **44** | **Modernised package interface and release** |
 
 ## Month-end checkpoints
 
