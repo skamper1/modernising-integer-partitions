@@ -25,6 +25,12 @@ bibliography: references.bib
 
 This document is a standalone companion to the five-page ISC proposal in [ISC Proposal](https://skamper1.github.io/modernising-integer-partitions/). It records the implementation approach, validation plan, delivery structure, and risk controls that sit behind the concise proposal narrative. Its purpose is to preserve operational detail without weakening the readability of the core funding case.
 
+## Evidence of Impact
+
+![Monthly Downloads of the partitions package](partitions_download_stats.png)
+
+The plot above summarises sustained monthly downloads over time and supports the case for modernising `partitions` to align with contemporary R workflows.
+
 # Detailed Technical Approach
 
 ## Architecture

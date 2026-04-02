@@ -34,7 +34,7 @@ bibliography: references.bib
 
 {{< include proposal/05-success.qmd >}}
 
-For implementation-level architecture, benchmark protocols, detailed monthly milestones, and expanded risk management, see the standalone companion document [Project Plan](https://skamper1.github.io/modernising-integer-partitions/project-plan.html).
+For implementation-level architecture, benchmark protocols, detailed monthly milestones, and expanded risk management, see the standalone companion document [Project Plan](https://skamper1.github.io/modernising-integer-partitions/project-plan.md).
 
 ::: refs
 :::
