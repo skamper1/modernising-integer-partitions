@@ -14,10 +14,14 @@ We will modernise the `partitions` package [@partitionspackage] by implementing 
 
 ## Delivery
 
-The minimum viable implementation includes a `partitions_iter` class, `nextElem.partitions_iter()`, and factory functions `iparts()`, `irestrictedparts()`, and `idiffparts()`, together with `testthat` [@testthatpackage] coverage demonstrating equivalence with bulk-generation outputs and independent iterator coexistence. We will benchmark bulk versus lazy memory behaviour and confirm interoperability with `foreach` and `itertools`. Detailed architecture, benchmark protocols, and risk controls are provided in the companion plan ([Project Plan](https://skamper1.github.io/modernising-integer-partitions/project-plan.html)).
+The minimum viable implementation includes a `partitions_iter` class, `nextElem.partitions_iter()`, and factory functions `iparts()`, `irestrictedparts()`, and `idiffparts()`, together with `testthat` [@testthatpackage] coverage demonstrating equivalence with bulk-generation outputs and independent iterator coexistence. We will benchmark bulk versus lazy memory behaviour and confirm interoperability with `foreach` and `itertools`. Detailed architecture, benchmark protocols, and risk controls are provided in the companion plan ([Project Plan](https://skamper1.github.io/modernising-integer-partitions/project-plan.md)).
 
 ---
 
 ## Evidence of Impact
 
-With **~1.3 million cumulative downloads** and **6,000–8,000 monthly active users**, `partitions` is established infrastructure in the R ecosystem. Standard iterator support therefore offers ecosystem-wide value: it improves usability for large combinatorial workflows without disrupting existing user code.
+![](partitions_download_stats.png){width=70% fig-align="center"}
+
+With **~1.3 million cumulative downloads** and **6,000–8,000 monthly downloads**, the package is a foundational tool in the R ecosystem. This level of usage, comparable to well-established data manipulation and statistical packages, justifies investment in modernising its infrastructure to integrate with contemporary R practices (lazy evaluation, functional programming, parallelisation).
+
+Users across combinatorics research, statistics, operations research, and scientific computing depend on this package. Enabling standard iterator support will unlock new use cases and remove artificial barriers to productivity for researchers working with large combinatorial spaces.
