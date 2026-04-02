@@ -1,7 +1,7 @@
 
 # Project Plan
 
-Delivery is structured across six phases over six months (July-December 2026). The main proposal reports milestones and outcomes at a high level; full operational detail appears in [Project Plan](https://skamper1.github.io/modernising-integer-partitions/project-plan.md).
+Delivery is structured across six phases over six months (July-December 2026). The main proposal reports milestones and outcomes at a high level; full operational detail appears in [Project Plan](https://github.com/skamper1/modernising-integer-partitions/blob/main/project-plan.md).
 
 | Phase | Duration | Key Deliverables | Effort |
 |---|---|---|---|

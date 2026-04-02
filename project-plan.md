@@ -1,25 +1,4 @@
----
-title: "Detailed Project Plan: Modernising Integer Partitions"
-author:
-  - name: Sam Kamperis
-    orcid: 0000-0002-0539-6994
-    affiliations:
-      - "Oxford Brookes University"
-  - name: Robin Hankin
-    orcid: 0000-0001-5982-0415
-    affiliations:
-      - "University of Stirling"
-date: today
-date-format: iso
-format:
-  html:
-    embed-resources: true
-  hikmah-pdf:
-    geometry:
-      - left=1.25in
-      - right=1.25in
-bibliography: references.bib
----
+
 
 # Purpose and Scope
 
@@ -84,11 +63,11 @@ Several packages provide strong combinatorial functionality, but interoperabilit
 
 ## RcppAlgos
 
-`RcppAlgos` [@rcppalgospackage; @rcppalgos-benchmarks] provides high-performance C++ routines for combinatorics and integer partitions. Its partition functionality is exposed through custom S4 iterator mechanics (`Partitions-class` with custom methods), so direct usage in `foreach` or `itertools` requires an adaptation layer.
+`RcppAlgos` ([package](https://CRAN.R-project.org/package=RcppAlgos); [benchmarks](https://cran.r-project.org/web/packages/RcppAlgos/vignettes/HighPerformanceBenchmarks.html)) provides high-performance C++ routines for combinatorics and integer partitions. Its partition functionality is exposed through custom S4 iterator mechanics (`Partitions-class` with custom methods), so direct usage in `foreach` or `itertools` requires an adaptation layer.
 
 ## arrangements
 
-`arrangements` [@arrangementspackage] provides efficient generators including integer partitions, but uses package-specific iteration methods (`getnext()`, `collect()`) rather than `nextElem`-style interoperability.
+`arrangements` ([package](https://CRAN.R-project.org/package=arrangements)) provides efficient generators including integer partitions, but uses package-specific iteration methods (`getnext()`, `collect()`) rather than `nextElem`-style interoperability.
 
 ## Positioning
 
@@ -110,7 +89,7 @@ This project is complementary, not competitive with these packages. It targets i
 | 50 | 204,226 | Often memory-prohibitive | Viable |
 | 100 | ~1.9 x 10^8 | Infeasible | Viable |
 
-- Measure with `bench::mark(memory = TRUE)` [@benchpackage] together with RSS-style profiling.
+- Measure with `bench::mark(memory = TRUE)` (via [bench package](https://CRAN.R-project.org/package=bench)) together with RSS-style profiling.
 - Record outcomes for reproducibility and include rendered results in package documentation.
 
 ## Iterator overhead protocol
